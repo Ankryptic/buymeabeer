@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`font-gooflex h-full antialiased`}
     >
-      <body className=" min-h-full flex flex-col">
+      <body className="bg-[#5b5570] min-h-full flex flex-col">
         <Navbar/>
         {children}
       </body>
