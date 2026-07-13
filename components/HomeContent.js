@@ -81,15 +81,15 @@ const HomeContent = () => {
 
                     <div className="tile-2 absolute right-0 top-40 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-3xl flex flex-col items-center gap-4 px-5 py-4">
                         <div className="flex items-center gap-4 font-semibold">
-                        <div className="bg-[#5b5570] rounded-full p-1">
-                            <Image
-                                src="/beer.png"
-                                width={30}
-                                height={30}
-                                alt="beer pic"
-                            />
-                        </div>
-                        <p>Sonu bought 25 beers</p>
+                            <div className="bg-[#5b5570] rounded-full p-1">
+                                <Image
+                                    src="/beer.png"
+                                    width={30}
+                                    height={30}
+                                    alt="beer pic"
+                                />
+                            </div>
+                            <p>Sonu bought 25 beers</p>
                         </div>
 
                         <div className="flex items-center gap-4 text-gray-300">
@@ -105,15 +105,15 @@ const HomeContent = () => {
 
                     <div className="tile-3 absolute left-14 bottom-15 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-3xl flex flex-col items-center gap-4 px-5 py-4">
                         <div className="flex items-center gap-4 font-semibold">
-                        <div className="bg-red-300 rounded-full p-1">
-                            <Image
-                                src="/beer.png"
-                                width={30}
-                                height={30}
-                                alt="beer pic"
-                            />
-                        </div>
-                        <p>Ritika bought a beers</p>
+                            <div className="bg-red-300 rounded-full p-1">
+                                <Image
+                                    src="/beer.png"
+                                    width={30}
+                                    height={30}
+                                    alt="beer pic"
+                                />
+                            </div>
+                            <p>Ritika bought a beers</p>
                         </div>
 
                         <div className="flex items-center gap-4 text-gray-300">
@@ -126,14 +126,14 @@ const HomeContent = () => {
                             <p>Thanks Ritika! <span className="text-red-500">&hearts;</span></p>
                         </div>
                     </div>
-                    
+
                     <div className="tile-4 absolute left-50 top-40 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-full p-4">
-                            <Image
-                                src="/heart.png"
-                                width={30}
-                                height={30}
-                                alt="beer pic"
-                            />
+                        <Image
+                            src="/heart.png"
+                            width={30}
+                            height={30}
+                            alt="beer pic"
+                        />
                     </div>
 
                     <div className="tile-5 absolute left-60 top-10 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-full text-2xl p-4">
@@ -143,6 +143,117 @@ const HomeContent = () => {
                     <div className="tile-6 absolute right-55 top-65 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-full text-2xl p-3">
                         <div>👋</div>
                     </div>
+                </div>
+            </div>
+
+            <div className="section-3 container m-auto mt-20 bg-[#2f2d41] rounded-[50px] flex flex-col items-center justify-center p-14 w-[80%]">
+                <div className="text-lg">Memberships</div>
+                <h2 className="text-wrap text-6xl font-bold text-center leading-20">Start a membership for <br /> your biggest fans.</h2>
+                <p className="text-2xl text-center px-48 leading-10 mt-8">Earn a recurring income by accepting monthly or yearly subscriptions. Share exclusive content, or just give them a way to support your work on an ongoing basis.</p>
+
+                <div className="relative flex gap-20">
+                    <div className="box-1 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-4xl px-10 py-8 mt-24">
+                        <div className="w-65 h-90 flex flex-col items-center ">
+                            <div className="relative w-full h-[40%] overflow-hidden">
+                                <Image
+                                    className="w-full object-contain"
+                                    src="/membership_banner_1.png"
+                                    fill
+                                    alt="membership-banner"
+                                />
+                            </div>
+                            <div className="font-bold mt-2">Basic membership</div>
+                            <div className="text-xs mt-2">₹50 / month</div>
+
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={20} className="invert" alt="tic svg" />
+                                <p className="text-xs text-gray-200">3.3% OFF all my ebooks</p>
+                            </div>
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={20} className="invert" alt="tic svg" />
+                                <p className="text-xs text-gray-200">Access to members-only page</p>
+                            </div>
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={20} className="invert" alt="tic svg" />
+                                <p className="text-xs text-gray-200">Exclusive posts and messages</p>
+                            </div>
+                            <div className="w-full bg-[#0d0d12] rounded-full text-sm text-center font-bold py-3.5 mt-8">Join</div>
+                        </div>
+                    </div>
+
+                    <div className="box-2 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-4xl px-10 py-8 mt-24">
+                        <div className="w-65 h-90 flex flex-col items-center ">
+                            <div className="relative w-full h-[40%] overflow-hidden">
+                                <Image
+                                    className="w-full object-contain"
+                                    src="/membership_banner_3.png"
+                                    fill
+                                    alt="membership-banner"
+                                />
+                            </div>
+                            <div className="font-bold mt-2">Advanced membership</div>
+                            <div className="text-xs mt-2">₹250 / month</div>
+
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={20} className="invert" alt="tic svg" />
+                                <p className="text-xs text-gray-200">Highly private journal pages</p>
+                            </div>
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={20} className="invert" alt="tic svg" />
+                                <p className="text-xs text-gray-200">Email alert for new posts</p>
+                            </div>
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={20} className="invert" alt="tic svg" />
+                                <p className="text-xs text-gray-200">work in progress updates</p>
+                            </div>
+                            <div className="w-full bg-[#0d0d12] rounded-full text-sm text-center font-bold py-3.5 mt-8">Join</div>
+                        </div>
+                    </div>
+
+                    <div className="box-3 absolute left-50 -top-5 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-4xl px-10 py-8 mt-24">
+                        <div className="w-65 h-100 flex flex-col items-center ">
+                            <div className="relative w-full h-[40%] overflow-hidden">
+                                <Image
+                                    className="w-full object-contain"
+                                    src="/membership_banner_3.png"
+                                    fill
+                                    alt="membership-banner"
+                                />
+                            </div>
+                            <div className="font-bold text-lg mt-2">Pro membership</div>
+                            <div className="text-sm mt-2">₹150 / month</div>
+
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={30} className="invert" alt="tic svg" />
+                                <p className="text-sm text-gray-200">support me on a monthly basis</p>
+                            </div>
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={30} className="invert" alt="tic svg" />
+                                <p className="text-sm text-gray-200">Email alert for new posts</p>
+                            </div>
+                            <div className="w-full flex items-center mt-2">
+                                <img src="/tick.svg" width={30} className="invert" alt="tic svg" />
+                                <p className="text-sm text-gray-200">Exclusive posts and messages</p>
+                            </div>
+                            <div className="w-full bg-[#0d0d12] rounded-full text-sm text-center font-bold py-3.5 mt-8">Join</div>
+                        </div>
+                    </div>
+
+                    <div className="tile-1 absolute -right-50 top-60 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-4xl px-6 py-6 flex items-center gap-5">
+
+                        <Image
+                            className="invert"
+                            src={"/bank.svg"}
+                            width={30}
+                            height={30}
+                            alt="bank svg"
+                        />
+                        <div>
+                            <div className="text-xl font-bold">₹15,000</div>
+                            <div className="">Earned this month</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
