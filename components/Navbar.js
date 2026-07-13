@@ -21,11 +21,11 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="font-gooflex h-16 bg-[#181921] text-white flex items-center justify-between px-7">
+        <nav className="font-gooflex h-20 bg-[#181921] text-white flex items-center justify-between px-7">
             <div className="flex items-center justify-center gap-3 select-none">
-                <Link href={"/faq"} className="cursor-pointer hover:bg-[#3b354f] text-[#14px] px-4 py-1.5 rounded-full"><span>FAQ</span></Link>
-                <Link href={"/wall"} className="cursor-pointer hover:bg-[#3b354f] text-[#14px] px-4 py-1.5 rounded-full" ><span>Wall of &hearts;</span></Link>
-                <div className="cursor-pointer hover:bg-[#3b354f] text-[#14px] px-4 py-1.5 rounded-full flex items-center justify-center gap-x-1" onClick={handleRes} >
+                <Link href={"/faq"} className="cursor-pointer hover:bg-[#3b354f] text-lg px-4 py-2 rounded-full"><span>FAQ</span></Link>
+                <Link href={"/wall"} className="cursor-pointer hover:bg-[#3b354f] text-lg px-4 py-2 rounded-full" ><span>Wall of &hearts;</span></Link>
+                <div className="cursor-pointer hover:bg-[#3b354f] text-lg px-4 py-2 rounded-full flex items-center justify-center gap-x-1" onClick={handleRes} >
                     <span>Resources</span>
                     <Image
                         ref={arrows}
@@ -41,17 +41,17 @@ const Navbar = () => {
                 <Link href= "/" className="flex items-center justify-center">
                 <Image
                     src="/cheers_noBG.gif"
-                    width={50}
-                    height={50}
+                    width={70}
+                    height={70}
                     alt="Picture of the beer"
                 />
-                <span className="font-playwrite text-lg font-bold">Buy me a beer</span>
+                <span className="font-playwrite text-xl font-bold">Buy me a beer</span>
                 
                 </Link>
             </div>
 
-            <div className="flex items-center justify-center gap-2 select-none">
-                <div className="flex items-center bg-[#5b5570] hover:bg-[#3b354f] cursor-text w-54 rounded-full p-2 gap-2">
+            <div className="flex items-center justify-center gap-2 select-none ">
+                <div className="flex items-center bg-[#5b5570] hover:bg-[#3b354f] cursor-text w-54 rounded-full p-2 pl-3 gap-2">
                     <Image
                         className="invert"
                         src="/search.svg"
@@ -59,9 +59,9 @@ const Navbar = () => {
                         height={22}
                         alt="search svg"
                     />
-                    <span className="text-[15px]">Search creators</span>
+                    <span className="text-lg">Search creators</span>
                 </div>
-                <Link href={"/login"} className="hover:bg-[#3b354f] text-[14px] w-22 h-9 font-semibold flex items-center justify-center rounded-2xl"><span>Log in</span></Link>
+                <Link href={"/login"} className="hover:bg-[#3b354f] text-lg px-4 py-2 font-semibold flex items-center justify-center rounded-full"><span>Log in</span></Link>
                 <Link href={"/signup"}>
                     <div className="relative group">
                         <div
@@ -76,7 +76,7 @@ const Navbar = () => {
                             >
                                 <button
                                     name="text"
-                                    className="input font-semibold text-[14px] h-full opacity-90 w-full px-1 py-px rounded-xl bg-[#0d0d12]"
+                                    className="input font-semibold text-lg h-full opacity-90 w-full px-1 py-px rounded-xl bg-[#0d0d12]"
                                 >
                                     Sign up
                                 </button>
