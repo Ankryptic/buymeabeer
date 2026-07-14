@@ -5,7 +5,7 @@ import Image from "next/image";
 const HomeContent = () => {
     return (
         <main className="font-gooflex text-white">
-            <div className="section-1 h-screen container flex flex-col items-center bg-red-5000">
+            <div className="section-1 min-h-screen container flex flex-col items-center bg-red-5000">
                 <h1 className="w-[60%] text-8xl font-bold text-center mt-60">Fund your creative work</h1>
                 <p className="w-[60%] text-center text-2xl my-4">Accept support. Start a membership. Setup a shop. It’s easier than you think.</p>
                 <div className="get-stated mt-10">
@@ -398,7 +398,7 @@ const HomeContent = () => {
                                 alt="tick svg"
                             />
                         </div>
-                        <div className="text-2xl">You have 100% ownership of your supporters. We never email them, and you can export the list any time you like.</div>
+                        <div className="text-2xl">You have <span className="font-bold">100% ownership</span> of your supporters. We never email them, and you can export the list any time you like.</div>
                     </div>
 
                     <div className="flex gap-2 px-10">
@@ -411,7 +411,7 @@ const HomeContent = () => {
                                 alt="tick svg"
                             />
                         </div>
-                        <div className="text-2xl">You get to talk to a human for help, or if you just like some advice to hit the ground running.</div>
+                        <div className="text-2xl">You get to <span className="font-bold">talk to a human</span> for help, or if you just like some advice to hit the ground running.</div>
                     </div>
 
                     <div className="flex gap-2 px-10">
@@ -424,7 +424,86 @@ const HomeContent = () => {
                                 alt="tick svg"
                             />
                         </div>
-                        <div className="text-2xl">You get paid instantly to your bank account. No more 30-day delays.</div>
+                        <div className="text-2xl">You get paid instantly to your bank account. <span className="font-bold">No more 30-day delays.</span></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div className="section-7 h[70%] container bg-[#2f2d41] rounded-[50px] m-auto mt-20 flex flex-col items-center justify-center p-14 w-[80%]">
+                <h2 className="text-wrap text-6xl font-bold text-center leading-20">Make 20% or more, <br /> <span className="text-gray-300">compared to other platforms.</span></h2>
+
+                <div className="w-full grid grid-cols-3 gap-14 mt-12">
+
+                    <div className="space-y-1.5">
+                        <div className="mb-5">
+                            <Image
+                                className="invert"
+                                src={"/calender.svg"}
+                                width={40}
+                                height={40}
+                                alt="calender svg"
+                            />
+                        </div>
+                        <div className="text-lg font-bold">Not just a membership</div>
+                        <p className="text-xl text-[#e1dfdf]">Creators who previously only used Patreon noticed a massive increase in earnings after accepting one-off payments.</p>
+                    </div>
+
+                    <div className="space-y-1.5">
+                        <div className="mb-5">
+                            <Image
+                                className="invert"
+                                src={"/globe.svg"}
+                                width={40}
+                                height={40}
+                                alt="calender svg"
+                            />
+                        </div>
+                        <div className="text-lg font-bold">6 new languages</div>
+                        <p className="text-xl text-[#e1dfdf]">We now support Spanish, French, Italian, German and Ukrainian—making it easier for your global audience to support you.</p>
+                    </div>
+
+                    <div className="space-y-1.5">
+                        <div className="mb-5">
+                            <Image
+                                className="invert"
+                                src={"/message.svg"}
+                                width={40}
+                                height={40}
+                                alt="calender svg"
+                            />
+                        </div>
+                        <div className="text-lg font-bold">Email marketing</div>
+                        <p className="text-xl text-[#e1dfdf]">Instead of paying separately for email marketing tools like Mailchimp, send unlimited emails to your fans for free.</p>
+                    </div>
+
+                    <div className="space-y-1.5">
+                        <div className="mb-5">
+                            <Image
+                                className="invert"
+                                src={"/love.svg"}
+                                width={40}
+                                height={40}
+                                alt="calender svg"
+                            />
+                        </div>
+                        <div className="text-lg font-bold">Being friendly converts</div>
+                        <p className="text-xl text-[#e1dfdf]">ICYMI, we make it simple and fun for your supporters. While you cannot put a number on feelings, it tends to show on the results.</p>
+                    </div>
+
+                    <div className="space-y-1.5">
+                        <div className="mb-5">
+                            <Image
+                                className="invert"
+                                src={"/privacy.svg"}
+                                width={40}
+                                height={40}
+                                alt="calender svg"
+                            />
+                        </div>
+                        <div className="text-lg font-bold">Your privacy comes first</div>
+                        <p className="text-xl text-[#e1dfdf]">Receive fan support safely without disclosing your identity or address. We’ll do the heavy-lifting.</p>
                     </div>
 
                 </div>
