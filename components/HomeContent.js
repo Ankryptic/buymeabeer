@@ -147,7 +147,7 @@ const HomeContent = () => {
             </div>
 
             <div className="section-3 container m-auto mt-20 bg-[#2f2d41] rounded-[50px] flex flex-col items-center justify-center p-14 w-[80%]">
-                <div className="text-lg">Memberships</div>
+                <div className="text-lg">MEMBERSHIP</div>
                 <h2 className="text-wrap text-6xl font-bold text-center leading-20">Start a membership for <br /> your biggest fans.</h2>
                 <p className="text-2xl text-center px-48 leading-10 mt-8">Earn a recurring income by accepting monthly or yearly subscriptions. Share exclusive content, or just give them a way to support your work on an ongoing basis.</p>
 
@@ -254,6 +254,101 @@ const HomeContent = () => {
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <div className="section-4 container m-auto mt-20 bg-[#2f2d41] rounded-[50px] flex flex-col items-center justify-center p-14 w-[80%]">
+                <div className="text-lg">SHOP</div>
+                <h2 className="text-wrap text-6xl font-bold text-center leading-20">Introducing Shop, <br /> the creative way to sell.</h2>
+                <p className="text-2xl text-center px-24 leading-10 mt-8">The things you’d like to sell probably do not belong in a Shopify store. Shop is designed from the ground up with creators in mind. Whether it’s a 1-1 Zoom call, art commissions, or an ebook, Shop is for you.</p>
+
+                <div className="relative flex gap-20">
+
+                    <div className="box-1 w-80 h-110 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-4xl mt-24 overflow-hidden">
+                        <div className="w-full h-full flex flex-col items-center ">
+                            <div className="relative bg-[#0d0d12] w-full h-[40%] flex items-center justify-center overflow-hidden">
+                                <Image
+                                    className="object-contain"
+                                    src="/book-icon.webp"
+                                    width={150}
+                                    height={150}
+                                    alt="membership-banner"
+                                />
+                                <div className="absolute top-5 left-5 bg-white text-black font-bold text-lg px-2 py-px rounded-lg">
+                                    <span>.PDF</span>
+                                </div>
+                            </div>
+
+                            <div className="w-full px-7 py-5">
+                                <div className="font-bold text-2xl mt-2">Design E-book</div>
+                                <div className="mt-2 flex items-center gap-2.5">
+                                    <span>₹2000</span>
+                                    <span>|</span>
+                                    <span className="flex items-center gap-2">
+                                        <img src="/blackStar.svg" width={12} alt="black-star" className="invert" />
+                                        <span>4.9 (40)</span>
+                                    </span>
+                                </div>
+                                <div className="w-full h-4 bg-[#5b5570] rounded-full mt-6"></div>
+                                <div className="w-1/2 h-4 bg-[#5b5570] rounded-full mt-6"></div>
+                                <div className="w-full bg-[#0d0d12] rounded-full text-sm text-center font-bold py-3.5 mt-8">Buy</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="tile-1 absolute -right-56 bottom-28 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-2xl px-5 py-6 flex items-center gap-2">
+
+                        <Image
+                            className="invert"
+                            src={"/bank.svg"}
+                            width={20}
+                            height={20}
+                            alt="bank svg"
+                        />
+                        <div>
+                            <div className=""><span className="text-xl font-bold">₹15,000</span> Earning</div>
+                        </div>
+                    </div>
+
+                    <div className="tile-2 absolute -left-56 top-50 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-full px-5 py-3 flex items-center gap-2">
+
+                        <Image
+                            className="invert"
+                            src={"/van.svg"}
+                            width={30}
+                            height={30}
+                            alt="bank svg"
+                        />
+                        <div>
+                            <div className="">One-tap checkout</div>
+                        </div>
+                    </div>
+
+                    <div className="tile-3 absolute -left-42 bottom-20 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-4xl px-10 py-5 flex flex-col items-center">
+
+                        <Image
+                            className="invert"
+                            src={"/shop.svg"}
+                            width={40}
+                            height={40}
+                            alt="bank svg"
+                        />
+                        <div className="font-bold text-2xl mt-4">753</div>
+                        <div>Sales</div>
+                    </div>
+
+                    <div className="tile-4 absolute -right-56 top-46 bg-[#3b354f] border border-[#0d0d12] shadow-lg shadow-[#0d0d12] rounded-4xl px-8 py-5 flex flex-col items-center gap-4">
+
+                        <div className="">Liked it? give rating</div>
+
+                        <div className="flex items-center gap-2">
+                            <img src="/yellowStar.svg" alt="yellow-star" width={24} />
+                            <img src="/yellowStar.svg" alt="yellow-star" width={24} />
+                            <img src="/yellowStar.svg" alt="yellow-star" width={24} />
+                            <img src="/yellowStar.svg" alt="yellow-star" width={24} />
+                            <img src="/blankStar.svg" alt="yellow-star" width={24} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
