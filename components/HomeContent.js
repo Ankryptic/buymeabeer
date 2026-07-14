@@ -351,6 +351,85 @@ const HomeContent = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="section-5 container m-auto mt-20 bg-[#2f2d41] rounded-[50px] flex flex-col items-center justify-center p-14 w-[80%]">
+                <div className="text-lg">POSTS, AUDIO & EMAIL</div>
+                <h2 className="text-wrap text-6xl font-bold text-center leading-20">Publish your best work</h2>
+                <p className="text-2xl text-center px-24 leading-10 mt-8">Buy Me a Coffee makes it easy to publish free and exclusive content. Try different formats such as audio, and make it members-only to drive more memberships.</p>
+
+                <div className="box-1 w-[90%] rounded-4xl mt-14 overflow-hidden">
+                    <div className="w-full flex items-center justify-center">
+                        <Image
+                            className="object-contain"
+                            src={"/posts_v8.webp"}
+                            width={1000}
+                            height={1000}
+                            alt="posts pic"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="section-6 h[70%] container m-auto mt-20 flex flex-col items-center justify-center p-14 w-[80%]">
+                <h2 className="text-wrap text-6xl font-bold text-center leading-20">Designed for creators, <br /> <span className="text-gray-300">not for businesses.</span></h2>
+
+                <div className="w-full grid grid-cols-2 gap-10 mt-24">
+
+                    <div className="flex gap-2 px-10">
+                        <div className="min-w-18">
+                            <Image
+                                className="invert border-2 border-black rounded-full"
+                                src={"/tick.svg"}
+                                width={40}
+                                height={40}
+                                alt="tick svg"
+                            />
+                        </div>
+                        <div className="text-2xl">We don't call them "customers" or transactions. They are your <span className="font-bold">supporters.</span> </div>
+                    </div>
+
+                    <div className="flex gap-2  px-10">
+                        <div className="min-w-18">
+                            <Image
+                                className="invert border-2 border-black rounded-full"
+                                src={"/tick.svg"}
+                                width={40}
+                                height={40}
+                                alt="tick svg"
+                            />
+                        </div>
+                        <div className="text-2xl">You have 100% ownership of your supporters. We never email them, and you can export the list any time you like.</div>
+                    </div>
+
+                    <div className="flex gap-2 px-10">
+                        <div className="min-w-18">
+                            <Image
+                                className="invert border-2 border-black rounded-full"
+                                src={"/tick.svg"}
+                                width={40}
+                                height={40}
+                                alt="tick svg"
+                            />
+                        </div>
+                        <div className="text-2xl">You get to talk to a human for help, or if you just like some advice to hit the ground running.</div>
+                    </div>
+
+                    <div className="flex gap-2 px-10">
+                        <div className="min-w-18">
+                            <Image
+                                className="invert border-2 border-black rounded-full"
+                                src={"/tick.svg"}
+                                width={40}
+                                height={40}
+                                alt="tick svg"
+                            />
+                        </div>
+                        <div className="text-2xl">You get paid instantly to your bank account. No more 30-day delays.</div>
+                    </div>
+
+                </div>
+
+            </div>
         </main>
     )
 }
