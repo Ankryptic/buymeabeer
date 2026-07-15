@@ -15,9 +15,7 @@ export default function RootLayout({ children }) {
       className={`font-gooflex h-full antialiased`}
     >
       <body className="bg-[#5b5570] min-h-full flex flex-col">
-        <Navbar/>
         {children}
-        <Footer/>
       </body>
     </html>
   );
