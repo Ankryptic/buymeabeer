@@ -1,6 +1,5 @@
-import Footer from "@/components/Footer";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import SessionWrapper from "@/components/SessionWrapper";
 
 
 export const metadata = {
@@ -15,7 +14,9 @@ export default function RootLayout({ children }) {
       className={`font-gooflex h-full antialiased`}
     >
       <body className="bg-[#5b5570] min-h-full flex flex-col">
-        {children}
+        <SessionWrapper>
+          {children}
+        </SessionWrapper>
       </body>
     </html>
   );
