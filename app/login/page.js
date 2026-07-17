@@ -1,25 +1,21 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
-    const {data : session} = useSession()
+    const { data: session, status } = useSession()
+    const router = useRouter()
 
-    if (session) {
-        return (
-            <div>
-                <div>You're logged in as</div>
-                <span>{session.user.username}</span>
-                <button onClick={() => signOut()}>Sign out</button>
-            </div>
-        )
-    }
+    useEffect(() => {
+        if (status === "authenticated") {
+            router.push("/dashboard");
+        }
+    }, [status, router])
 
-    else {
-
-
+    if (!session) {
         return (
             <div>
                 <nav className='flex items-center justify-between px-6 py-2'>
@@ -186,4 +182,4 @@ const Login = () => {
     }
 }
 
-export default Login
+export default Login;
