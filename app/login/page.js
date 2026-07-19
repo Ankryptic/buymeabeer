@@ -76,23 +76,6 @@ const Login = () => {
                         <button
                             className="cursor-pointer flex items-center text-center bg-[#2f2d41] border border-[#0d0d12] rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-white hover:text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                             <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 -2 44 44" version="1.1">
-                                <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                                    <g id="Color-" transform="translate(-702.000000, -265.000000)" fill="#007EBB">
-                                        <path
-                                            d="M746,305 L736.2754,305 L736.2754,290.9384 C736.2754,287.257796 734.754233,284.74515 731.409219,284.74515 C728.850659,284.74515 727.427799,286.440738 726.765522,288.074854 C726.517168,288.661395 726.555974,289.478453 726.555974,290.295511 L726.555974,305 L716.921919,305 C716.921919,305 717.046096,280.091247 716.921919,277.827047 L726.555974,277.827047 L726.555974,282.091631 C727.125118,280.226996 730.203669,277.565794 735.116416,277.565794 C741.21143,277.565794 746,281.474355 746,289.890824 L746,305 L746,305 Z M707.17921,274.428187 L707.117121,274.428187 C704.0127,274.428187 702,272.350964 702,269.717936 C702,267.033681 704.072201,265 707.238711,265 C710.402634,265 712.348071,267.028559 712.41016,269.710252 C712.41016,272.34328 710.402634,274.428187 707.17921,274.428187 L707.17921,274.428187 L707.17921,274.428187 Z M703.109831,277.827047 L711.685795,277.827047 L711.685795,305 L703.109831,305 L703.109831,277.827047 L703.109831,277.827047 Z"
-                                            id="LinkedIn">
-
-                                        </path>
-                                    </g>
-                                </g>
-                            </svg> <span>Continue with LinkedIn</span>
-                        </button>
-
-
-                        <button
-                            className="cursor-pointer flex items-center text-center bg-[#2f2d41] border border-[#0d0d12] rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-white hover:text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 -4 48 48" version="1.1">
                                 <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                                     <g id="Color-" transform="translate(-300.000000, -164.000000)" fill="#00AAEC">
@@ -151,26 +134,6 @@ const Login = () => {
                             <span>Continue with Github</span>
                         </button>
 
-
-                        <button
-                            className="cursor-pointer flex items-center text-center bg-[#2f2d41] border border-[#0d0d12] rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-white hover:text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-                                viewBox="-1.5 0 20 20" version="1.1">
-                                <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                                    <g id="Dribbble-Light-Preview" transform="translate(-102.000000, -7439.000000)" fill="#000000">
-                                        <g id="icons" transform="translate(56.000000, 160.000000)">
-                                            <path
-                                                d="M57.5708873,7282.19296 C58.2999598,7281.34797 58.7914012,7280.17098 58.6569121,7279 C57.6062792,7279.04 56.3352055,7279.67099 55.5818643,7280.51498 C54.905374,7281.26397 54.3148354,7282.46095 54.4735932,7283.60894 C55.6455696,7283.69593 56.8418148,7283.03894 57.5708873,7282.19296 M60.1989864,7289.62485 C60.2283111,7292.65181 62.9696641,7293.65879 63,7293.67179 C62.9777537,7293.74279 62.562152,7295.10677 61.5560117,7296.51675 C60.6853718,7297.73474 59.7823735,7298.94772 58.3596204,7298.97372 C56.9621472,7298.99872 56.5121648,7298.17973 54.9134635,7298.17973 C53.3157735,7298.17973 52.8162425,7298.94772 51.4935978,7298.99872 C50.1203933,7299.04772 49.0738052,7297.68074 48.197098,7296.46676 C46.4032359,7293.98379 45.0330649,7289.44985 46.8734421,7286.3899 C47.7875635,7284.87092 49.4206455,7283.90793 51.1942837,7283.88393 C52.5422083,7283.85893 53.8153044,7284.75292 54.6394294,7284.75292 C55.4635543,7284.75292 57.0106846,7283.67793 58.6366882,7283.83593 C59.3172232,7283.86293 61.2283842,7284.09893 62.4549652,7285.8199 C62.355868,7285.8789 60.1747177,7287.09489 60.1989864,7289.62485"
-                                                id="apple-[#173]">
-
-                                            </path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-
-                            <span>Continue with Apple</span>
-                        </button>
 
 
                     </div>
