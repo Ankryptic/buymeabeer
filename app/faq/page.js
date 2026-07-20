@@ -6,8 +6,8 @@ import Link from "next/link";
 
 const faq = [
     {
-        ques: "Who uses Buy Me a Coffee?",
-        ans: "Anyone with an audience. Youtubers, musicians, podcasters, writers, programmers, nonprofits, cosplayers, you name it. More than 2 million creators and their supporters are on Buy Me a Coffee."
+        ques: "Who uses Buy Me a Beer?",
+        ans: "Anyone with an audience. Youtubers, musicians, podcasters, writers, programmers, nonprofits, cosplayers, you name it. More than 2 million creators and their supporters are on Buy Me a Beer."
     },
     {
         ques: "How do I get paid?",
@@ -18,11 +18,11 @@ const faq = [
         ans: "We support all major credit and debit cards, Apple Pay, Google Pay, Cash App and other global payment methods."
     },
     {
-        ques: "Is there a fee to use Buy Me a Coffee?",
+        ques: "Is there a fee to use Buy Me a Beer?",
         ans: "We do not charge a monthly fee. All features including publishing and emails are free for everyone. We charge a 5% transaction fee, and creators keep 95% of the earnings. We make money only when you do. We'll never show ads and we'll never sell your data"
     },
     {
-        ques: "Is Buy Me a Coffee safe and reliable?",
+        ques: "Is Buy Me a Beer safe and reliable?",
         ans: <div><div className="mb-2">We take security seriously. Here are some measures we’ve taken to protect your and your supporter’s data.</div>
             <ul className="list-disc p-4">
                 <li>We don’t store credit card data on our servers. Payment processing is handled by Stripe (PCI Compliance Level 1) and Wise.</li>
@@ -37,19 +37,19 @@ const faq = [
     },
     {
         ques: "How is this different from other platforms for creators?",
-        ans: "With Buy Me a Coffee, you get everything you need to run your creative business. You don't have to worry about paying for and stitching together a dozen services, from sending emails to charging for subscriptions. Besides, your Buy Me a Coffee page is arguably the most delightful experience you can offer your audience. From the one-tap payment (look ma, no sign-ups required!) to the delightful little touches for your supporters, we’ve obsessed over every bit of detail."
+        ans: "With Buy Me a Beer, you get everything you need to run your creative business. You don't have to worry about paying for and stitching together a dozen services, from sending emails to charging for subscriptions. Besides, your Buy Me a Beer page is arguably the most delightful experience you can offer your audience. From the one-tap payment (look ma, no sign-ups required!) to the delightful little touches for your supporters, we’ve obsessed over every bit of detail."
     },
     {
-        ques: "Can I build a serious business using Buy Me a Coffee?",
-        ans: "Yes, there are many creators earning a six-figure income on Buy Me a Coffee. We will grow with you."
+        ques: "Can I build a serious business using Buy Me a Beer?",
+        ans: "Yes, there are many creators earning a six-figure income on Buy Me a Beer. We will grow with you."
     },
     {
         ques: "Who are you folks?",
-        ans: "Buy Me a Coffee is one of the leading creator economy companies in the world. It was founded in the UK in 2017 by a team of creators who turned their passion into a platform. Buy Me a Coffee is backed by Y Combinator and Stripe. Read more about us and our guiding values."
+        ans: "Buy Me a Beer is one of the leading creator economy companies in the world. It was founded in the UK in 2017 by a team of creators who turned their passion into a platform. Buy Me a Beer is backed by Y Combinator and Stripe. Read more about us and our guiding values."
     },
     {
-        ques: "How do I contact Buy Me a Coffee?",
-        ans: "You can email us at support@buymeacoffee.com, or leave us a message on the Intercom chat. We also respond to every feature request submitted."
+        ques: "How do I contact Buy Me a Beer?",
+        ans: "You can email us at support@buymeaBeer.com, or leave us a message on the Intercom chat. We also respond to every feature request submitted."
     },
 ]
 
