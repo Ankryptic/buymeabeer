@@ -2,10 +2,10 @@
 import React from "react";
 import Link from "next/link";
 
-const Footer = () => {
+const Footer = ({color}) => {
 
     return (
-        <footer className="text-white pb-18 pt-14 flex items-center justify-around">
+        <footer className={`text-white bg-[${color}] pb-18 pt-14 flex items-center justify-around`}>
             <div className="text-lg font-light text-gray-300">&copy; Buy Me a Beer</div>
             <div className="flex items-center gap-8 font-semibold">
                 <Link href={"/about"}>About</Link>

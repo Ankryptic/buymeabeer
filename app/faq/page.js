@@ -58,7 +58,7 @@ const Faq = () => {
 
     return <>
         <Navbar />
-        <div className="main min-h-[70vh] text-white w-full">
+        <div className="main min-h-[70vh] text-white w-full bg-[#181921]">
 
             <div className="section-1 w-1/2 m-auto text-center">
                 <h1 className="font-playwrite pt-30 text-3xl font-bold">Frequently Asked Questions</h1>
@@ -96,7 +96,7 @@ const Faq = () => {
 
             </div>
         </div>
-        <Footer />
+        <Footer color={"#181921"}/>
     </>
 }
 export default Faq;
