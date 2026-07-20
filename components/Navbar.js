@@ -23,9 +23,9 @@ const Navbar = () => {
     return (
         <nav className="w-full font-gooflex h-20 bg-[#181921] text-white flex items-center justify-between px-7">
             <div className="flex items-center justify-center gap-3 select-none">
-                <Link href={"/faq"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full"><span>FAQ</span></Link>
-                <Link href={"/wall"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full" ><span>Wall of &hearts;</span></Link>
-                <div className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 rounded-full flex items-center justify-center gap-x-1" onClick={handleRes} >
+                <Link href={"/faq"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full transition-all duration-300"><span>FAQ</span></Link>
+                <Link href={"/wall"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full transition-all duration-300" ><span>Wall of &hearts;</span></Link>
+                <div className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 rounded-full flex items-center justify-center gap-x-1 transition-all duration-300" onClick={handleRes} >
                     <span className="text-[15px]">Resources</span>
                     <Image
                         ref={arrows}
@@ -61,7 +61,7 @@ const Navbar = () => {
                     />
                     <span className="text-[15px]">Search creators</span>
                 </div>
-                <Link href={"/login"} className="hover:bg-[#3b354f] px-4 py-2 text-[15px] font-semibold flex items-center justify-center rounded-full"><span>Log in</span></Link>
+                <Link href={"/login"} className="hover:bg-[#3b354f] px-4 py-2 text-[15px] font-semibold flex items-center justify-center rounded-full transition-all duration-300"><span>Log in</span></Link>
                 <Link href={"/signup"}>
                     <div className="relative group">
                         <div
