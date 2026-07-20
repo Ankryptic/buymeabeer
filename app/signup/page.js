@@ -1,11 +1,20 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
     const { data: session } = useSession()
+    const [username, setUsername] = useState("");
+    const [buttonClick, setButtonClick] = useState(0);
+    const router = useRouter();
+
+
+    const handleSignup = () => {
+        buttonClick === 0 ? setButtonClick(1) : buttonClick === 1 ? router.push("/complete-your-page") : setButtonClick(0); 
+    }
 
     return (
         <div className="w-full flex bg-[#2f2d41] text-white">
@@ -50,16 +59,18 @@ const Signup = () => {
 
                 <div className="right-main flex flex-col h-[75%] items-center justify-center">
 
-                    <div className="ch-username hidden w-1/2 space-y-1">
+                    <div className={`ch-username ${buttonClick === 0 ? "" : "hidden"} w-1/2 space-y-1`}>
                         <div className="font-semibold text-3xl">Create your account</div>
                         <div className="text-gray-300">Choose a username for your page.</div>
                         <div className="user-input flex items-center bg-[#2f2d41] hover:bg-[#3b354f] cursor-text w-full rounded-2xl px-6 py-4 gap-2 mt-4">
                             <span>buymeabeer.com/</span>
-                            <input type="text" placeholder="username" className="outline-none w-full" />
+                            <input type="text" placeholder="username" className="outline-none w-full" value={username} onChange={(e) => {setUsername(e.target.value)}}/>
                         </div>
                     </div>
 
-                    <div className="email-pass w-1/2 flex flex-col items-center justify-center px-20">
+                    <div className={`email-pass ${buttonClick === 1 ? "flex" : "hidden"} w-1/2 flex flex-col items-center justify-center px-20`}>
+                        <div className="w-full text-3xl font-medium mb-5">Welcome, {username}</div>
+
                         <div className="signIn-btns w-full flex flex-col gap-2">
                             <button
                                 className="cursor-pointer flex items-center text-center bg-[#2f2d41] border border-[#0d0d12] rounded-lg shadow-md w-full px-6 pl-25 py-2 text-sm font-medium text-white hover:text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
@@ -174,7 +185,7 @@ const Signup = () => {
                     <div className="flex items-center justify-between h-full">
                         <h5 className="text-gray-300 text-[14px]">By continuing, you agree to the <Link className="text-white underline hover:no-underline" href={"/terms"}>terms of service</Link> and <Link className="text-white underline hover:no-underline" href={"/policy"}>privacy policy</Link> .</h5>
 
-                        <button className='cursor-pointer  text-center bg-[#181921] hover:bg-[#0d0d12] px-12 py-4 rounded-full'>Sign up</button>
+                        <button className='cursor-pointer  text-center bg-[#181921] hover:bg-[#0d0d12] px-12 py-4 rounded-full' onClick={() => handleSignup()}>Sign up</button>
                     </div>
 
                 </div>
