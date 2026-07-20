@@ -45,7 +45,7 @@ const faq = [
     },
     {
         ques: "Who are you folks?",
-        ans: "Buy Me a Beer is one of the leading creator economy companies in the world. It was founded in the UK in 2017 by a team of creators who turned their passion into a platform. Buy Me a Beer is backed by Y Combinator and Stripe. Read more about us and our guiding values."
+        ans: "Buy Me a Beer is one of the leading creator economy companies in the world. It was founded in the India in 2026 by a Akki who turned his passion into a platform. Buy Me a Beer is backed by Y Combinator and Stripe. Read more about us and our guiding values."
     },
     {
         ques: "How do I contact Buy Me a Beer?",

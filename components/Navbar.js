@@ -24,7 +24,7 @@ const Navbar = () => {
         <nav className="w-full font-gooflex h-20 bg-[#181921] text-white flex items-center justify-between px-7">
             <div className="flex items-center justify-center gap-3 select-none">
                 <Link href={"/faq"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full transition-all duration-300"><span>FAQ</span></Link>
-                <Link href={"/wall"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full transition-all duration-300" ><span>Wall of &hearts;</span></Link>
+                <Link href={"/reviews"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full transition-all duration-300" ><span>Wall of &hearts;</span></Link>
                 <div className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 rounded-full flex items-center justify-center gap-x-1 transition-all duration-300" onClick={handleRes} >
                     <span className="text-[15px]">Resources</span>
                     <Image

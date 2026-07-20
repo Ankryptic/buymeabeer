@@ -7,4 +7,15 @@
   --font-playwrite: "Playwrite ID", cursive;
   --font-gooflex: "Google Sans Flex", sans-serif;
   /* --font-playwrite: "Pacifico", cursive; */
+
+  --animate-heartbeat: heartbeat 2s ease-in-out infinite;
+
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+  }
 }
