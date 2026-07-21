@@ -74,7 +74,7 @@ const CompleteYourPage = () => {
                     <div className="bar-1 h-1 w-full bg-black"></div>
                 </div>
                 <div className="w-full flex items-center justify-end my-5 pr-15">
-                    <button className="text-center cursor-pointer bg-[#181921] hover:bg-[#0d0d12] py-4 px-12 rounded-full">Next</button>
+                    <Link href={"/setup-payout"} className="text-center cursor-pointer bg-[#181921] hover:bg-[#0d0d12] py-4 px-12 rounded-full">Next</Link>
                 </div>
             </div>
         </div>
