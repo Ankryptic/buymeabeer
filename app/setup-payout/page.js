@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -33,10 +33,21 @@ const countryList = [
     },
 ]
 
+// Setup Payout
 const SetupPayout = () => {
     const [option, setOption] = useState(false);
     const [country, setCountry] = useState("Choose your country")
+    const [searchRes, setSearchRes] = useState('')
+    const searchInput = useRef(null)
 
+
+    // Filters the Country List
+    const query = searchRes.trim().toLowerCase()
+    const filteredCountry = countryList.filter((val) => {
+        return val.country.toLowerCase().includes(query);
+    });
+
+    
     const handleOption = () => {
         setOption(!option)
     }
@@ -44,6 +55,10 @@ const SetupPayout = () => {
     const handleSelect = (country) => {
         setCountry(country)
         setOption(false)
+    }
+
+    const handleInputFocus = () => {
+        searchInput.current.focus()
     }
 
     return (
@@ -96,7 +111,7 @@ const SetupPayout = () => {
                         <div className={`absolute top-20 z-10 Countr-list w-135 rounded-2xl overflow-x-hidden overflow-y-auto scrollbar-none bg-[#3b354f] transition-all duration-300 ${option ? "opacity-100 h-100" : "opacity-0 h-0"} pb-10`} >
 
                             <div className="bg-[#3b354f] w-full sticky top-0 p-4">
-                                <div className="flex bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4 cursor-text focus:outline-2 focus:outline-white">
+                                <div className="flex bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4 cursor-text focus:outline-2 focus:outline-white" onClick={handleInputFocus}>
                                     <Image
                                         className="invert mr-2"
                                         src={"/search.svg"}
@@ -104,14 +119,14 @@ const SetupPayout = () => {
                                         height={20}
                                         alt="search logo"
                                     />
-                                    <input type="text" placeholder="Search" className="w-full outline-none"/>
+                                    <input ref={searchInput} type="text" placeholder="Search" className="w-full outline-none" value={searchRes} onChange={(e) => setSearchRes(e.target.value)} />
                                 </div>
                             </div>
 
                             <div className="px-4 pb-8 h-[80%] overflow-x-hidden overflow-y-auto scrollbar-none">
-                                {countryList.map((val, idx) => {
+                                {filteredCountry.map((val, idx) => {
                                     return <div key={idx} className="py-2 px-4 rounded-xl cursor-pointer hover:bg-[#5b5570]"
-                                    onClick={() => {handleSelect(val.country)}}
+                                        onClick={() => { handleSelect(val.country) }}
                                     >{val.country}</div>
                                 })}
 
