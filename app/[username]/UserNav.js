@@ -54,7 +54,7 @@ const UserNav = ({username}) => {
                             />
                         </button>
 
-                        <div className={`absolute right-2 top-12 bg-[#5b5570] shadow shadow-black flex flex-col w-50 rounded-sm text-sm  transition-all duration-300 overflow-hidden
+                        <div className={`absolute z-15 right-2 top-12 bg-[#5b5570] shadow shadow-black flex flex-col w-50 rounded-sm text-sm  transition-all duration-300 overflow-hidden
                             ${proDropdown ? "opacity-100 p-4 max-h-50" :
                                 "opacity-0 max-h-0 p-0"
                             }
