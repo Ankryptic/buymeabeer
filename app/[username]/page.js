@@ -1,91 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import UserNav from "./UserNav";
-import EditPage from "./EditPage";
+import ProfilePage from "./ProfilePage";
 
 const Username = async ({ params }) => {
     const { username } = await params;
 
     return (
         <div className="relative h-screen">
-            <UserNav username={username} />
-            <div className="main relative z-1 flex items-center justify-center w-full h-[72vh] text-white">
 
-                {/* Cover Image */}
-                <div className="absolute top-0 w-full -z-10 cover-pic flex items-center justify-center bg-red-300 h-50">
-                    <div className="absolute -z-9 w-full h-full">
-                        <Image
-                            className="object-cover"
-                            src={"/blank_cover.png"}
-                            fill
-                            alt="cover-pic"
-                        />
-                    </div>
-                    <label className="relative -top-5 z-1 flex items-center gap-2 bg-gray-200 text-black px-4 py-2 rounded-xl cursor-pointer" htmlFor="upload_cover">
-                        <Image
-                            className=""
-                            src={"/image_icon.svg"}
-                            height={16}
-                            width={16}
-                            alt="image-icon"
-                        />
-                        <span className="font-semibold text-sm">Add cover image</span>
-                    </label>
-                    <input type="file" id="upload_cover" style={{ display: "none" }} />
-                </div>
-
-                <div className="mt-25 w-full flex justify-center gap-2">
-
-                    <div className="box1 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
-
-                        <div className="flex items-center justify-between">
-                            <span className="font-semibold">About Shreeraj</span>
-                            <button type="buton" className="underline hover:no-underline text-sm">Edit</button>
-                        </div>
-
-                        <div>
-                            <span className="text-gray-300">AI Engineer</span>
-                        </div>
-
-                        <hr className="text-gray-300" />
-
-                        <div className="space-y-2">
-                            <div className="text-lg font-bold">Recent supports</div>
-                            <div className="bg-[#3b354f] text-red-500 h-35 rounded-xl flex flex-col items-center justify-center">
-                                <span className="animate-heartbeat text-2xl">&hearts;</span>
-                                <span className="text-sm">Be the first one to support Shreeraj.</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="box2 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
-
-                        <div className="flex items-center justify-between">
-                            <span className="font-semibold">About Shreeraj</span>
-                        </div>
-
-                        <div>
-                            <input type="text" placeholder="Name or @yoursocial (optional)" className="w-full bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
-                        </div>
-
-                        <div>
-                            <input type="text" placeholder="Enter your email" className="w-full bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
-                        </div>
-
-                        <div>
-                            <button type="button" className="w-full bg-[#181921] hover:bg-[#222130] cursor-pointer px-4 py-4 rounded-full">Follow</button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            {/* Edit Page */}
-            <EditPage active={false} />
+            <ProfilePage username={username}/>
 
             <footer className="absolute w-full bottom-0 h-22 flex flex-col items-center gap-3">
                 <div className="text-gray-300 flex items-center justify-center gap-5">

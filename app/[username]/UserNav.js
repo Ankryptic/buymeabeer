@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 
-const UserNav = ({username}) => {
+const UserNav = ({ username, setShowEdit }) => {
     const [proDropdown, setProDropdown] = useState(false);
     
 
@@ -34,7 +34,7 @@ const UserNav = ({username}) => {
                             alt="upload-logo"
                         />
                     </button>
-                    <button className="text-sm p-2 px-4 border border-[#5b5570] hover:bg-[#5b5570] rounded-full cursor-pointer">
+                    <button className="text-sm p-2 px-4 border border-[#5b5570] hover:bg-[#5b5570] rounded-full cursor-pointer" onClick={() => setShowEdit(true)}>
                         <span>Edit page</span>
                     </button>
                     <button className="text-sm p-2 px-4 border border-[#5b5570] bg-[#2f2d41] hover:bg-[#181921] rounded-full cursor-pointer">
