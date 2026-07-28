@@ -62,7 +62,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
                 <div className="box2 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
 
                     <div className="flex items-center justify-between">
-                        <span className="font-semibold">About Shreeraj</span>
+                        <span className="font-semibold">Follow Shreeraj</span>
                     </div>
 
                     <div>

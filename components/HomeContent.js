@@ -6,7 +6,6 @@ import Footer from "./Footer";
 import UserDb from "@/app/db/userDB";
 
 const HomeContent = () => {
-    UserDb()
 
     return (
         <div className="w-full">
