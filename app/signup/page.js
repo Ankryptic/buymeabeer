@@ -53,7 +53,7 @@ const Signup = () => {
                     /></Link>
                     <div className="space-x-2 pr-12 pt-8">
                         <span>Already have an account?</span>
-                        <Link href={"/signup"} className='underline hover:no-underline'>Sign in</Link>
+                        <Link href={"/login"} className='underline hover:no-underline'>Sign in</Link>
                     </div>
                 </div>
 

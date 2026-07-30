@@ -161,7 +161,7 @@ const Dashboard = () => {
 
                     {/* DropDown Menu */}
                     <div className="absolute top-10 right-10">
-                        <button className="flex items-center gap-2 text-sm p-2 px-4 bg-[#2f2d41] hover:bg-[#181921] rounded-full cursor-pointer shadow shadow-black" onClick={() => {setProDropdown(!proDropdown)}} aria-haspopup="menu" aria-expanded={proDropdown} onBlur={() => setProDropdown(false)}>
+                        <button className="flex items-center gap-2 text-sm p-2 px-4 bg-[#2f2d41] hover:bg-[#181921] rounded-full cursor-pointer shadow shadow-black" onClick={() => {setProDropdown(!proDropdown)}} aria-haspopup="menu" aria-expanded={proDropdown} onBlur={() => setProDropdown(true)}>
                             <span className="text-xl">&#9776;</span>
                             <Image
                                 className="invert"
@@ -173,7 +173,7 @@ const Dashboard = () => {
                         </button>
 
                         <div className={`absolute z-15 right-2 top-12 bg-[#2f2d41] shadow shadow-black flex flex-col w-50 rounded-sm text-sm  transition-all duration-300 overflow-hidden
-                            ${proDropdown ? "opacity-100 p-4 max-h-50" :
+                            ${proDropdown ? "opacity-100 p-4 max-h-60" :
                                 "opacity-0 max-h-0 p-0"
                             }
                         `}>
@@ -181,7 +181,7 @@ const Dashboard = () => {
                             <Link href={"/"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">Dashboard</Link>
                             <Link href={"/"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">My account</Link>
                             <Link href={"/"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">Refer a creator</Link>
-                            <button type="button" className="hover:bg-[#3b354f] py-2 px-2 rounded-lg text-start text-gray-300 cursor-pointer"><span>Logout</span></button>
+                            <button type="button" className="hover:bg-[#3b354f] py-2 px-2 rounded-lg text-start text-gray-300 cursor-pointer" onClick={() => {signOut()}}><span>Logout</span></button>
                         </div>
                     </div>
 

@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import UserDb from "@/app/db/userDB";
 
 const HomeContent = () => {
 
