@@ -12,6 +12,8 @@ export async function proxy(req) {
         const publicRoutes = [
             "/login",
             "/signup",
+            "/faq",
+            "/reviews"
         ];
 
         // Check for the pathname is Public route or not 
