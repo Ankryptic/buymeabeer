@@ -14,16 +14,22 @@ export async function proxy(req) {
             "/signup",
         ];
 
-        const userRouter = "/:username/:path*"
-
-        // Check for the pathname is public or not
+        // Check for the pathname is Public route or not 
         const isPublic = publicRoutes.some((route) => {
             pathname.startsWith(route)
         });
 
+
+        // if not login and pathname is not public route
         if (!token && !isPublic){
             console.log("redirectiong")
             return NextResponse.redirect(new URL("/login", req.url))
+        }
+
+        // Checks if login and Profile is completed or not
+        if(token && !token.profileCompleted && !pathname.startsWith("/complete-your-page")){
+            console.log("redirecting to complete")
+            return NextResponse.redirect(new URL("/complete-your-page", req.url))
         }
 
     } catch (error) {
