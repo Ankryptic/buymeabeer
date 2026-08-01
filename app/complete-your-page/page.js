@@ -1,8 +1,21 @@
-import React from "react";
+"use client"
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const CompleteYourPage = () => {
+    const { data: session, status } = useSession()
+    const router = useRouter()
+
+    useEffect(() => {
+        if(status === "unauthenticated"){
+            router.push("/login")
+        }
+    }, [status, router])
+
+
     return <>
         <div className="navbar flex items-center justify-between px-12 pt-8">
             <div className="logo">
@@ -15,7 +28,7 @@ const CompleteYourPage = () => {
                     /></Link>
             </div>
 
-            <button className="border border-white hover:bg-[#2f2d41] cursor-pointer text-white px-4 py-2 rounded-xl">
+            <button className="border border-white hover:bg-[#2f2d41] cursor-pointer text-white px-4 py-2 rounded-xl" onClick={() => signOut()}>
                 Logout
             </button>
         </div>

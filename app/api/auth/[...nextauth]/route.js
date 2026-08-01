@@ -4,6 +4,9 @@ import UserDb from "@/app/db/userDB"
 import User from "@/models/User"
 
 export const Handler = NextAuth({
+
+  secret: process.env.NEXTAUTH_SECRET,
+
   // Configure one or more authentication providers
   providers: [
     GithubProvider({
@@ -21,29 +24,44 @@ export const Handler = NextAuth({
       await UserDb()
 
       // check if user is Exist in the database
-      const UserData = await User.findOne({ email: user.email })
+      const existingUser = await User.findOne({ email: user.email })
 
-      if(!UserData){
-        throw Error("User not found!")
+      if(!existingUser){
+
+        // this is used to send error query to the login page
+        // return "/login?error=UserNotFound";
+
+        // Create new user account
+        await User.create({
+          username: user.email.split("@")[0],
+          email: user.email,
+        })
+
+        return true;
       }
-
-      // Store data to the database
-      // const userData = User.create({
-      //   username: user.email.split("@")[0],
-      //   email: user.email,
-      //   name: user.email.split("@")[0],
-      //   about: { type: String },
-      //   socialLink: { type: String },
-      //   profile: { type: String },
-      //   cover: { type: String },
-      //   country: { type: String },
-      //   createdAt: { type: Date, default: Date.now },
-      //   updatedAt: { type: Date, default: Date.now },
-      // })
 
       return true
     },
+
+    async jwt({token}) {
+      await UserDb()
+
+      if(token.email){
+        const existingUser = await User.findOne({ email: token.email, });
+
+        token.profileCompleted = existingUser?.profileCompleted ?? false;
+      }
+
+      return token;
+    },
+
+    async session({ session, token }){
+      session.user.profileCompleted = token.profileCompleted
+      return session;
+    }
+
   }
+
 })
 
 export { Handler as GET, Handler as POST };

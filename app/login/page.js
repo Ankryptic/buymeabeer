@@ -3,11 +3,15 @@ import React, { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const Login = () => {
     const { data: session, status } = useSession()
     const router = useRouter()
+
+    // this is used to get error for Oauth if user not found
+    // const searchParams = useSearchParams();
+    // const error = searchParams.get("error")
 
     useEffect(() => {
         if (status === "authenticated") {

@@ -10,13 +10,13 @@ const Dashboard = () => {
     const [proDropdown, setProDropdown] = useState(false)
 
     const { data: session, status } = useSession();
-    const router = useRouter();
+    const router = useRouter();     
 
     useEffect(() => {
         if (status === "unauthenticated") {
             router.push("/login")
         }
-    }, [status, router])
+    }, [status, router]);
 
     if (session) {
         const username = session.user.name.toLowerCase().trim().replace(/\s+/g, "")
