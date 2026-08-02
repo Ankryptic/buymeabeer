@@ -1,20 +1,35 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const CompleteYourPage = () => {
     const { data: session, status } = useSession()
-    const router = useRouter()
+    const [profilepic, setProfilePic] = useState("")
+    const [completeForm, setCompleteForm] = useState({
+        profilePic: "",
+        name: "",
+        about: "",
+        social: "",
+    })
 
-    useEffect(() => {
-        if(status === "unauthenticated"){
-            router.push("/login")
-        }
-    }, [status, router])
+    const handleChange = (e) => {
+        const file = e.target.files[0];
+        console.log(file.type)
 
+        if(!file) return;
+        else if(!(file.type).startsWith("image/")) return;
+
+        const url = URL.createObjectURL(file)
+        setProfilePic(url)
+    }
+
+    const handleAction = (prev, payload, e) => {
+        console.log("Clicked")
+        console.log(pending)
+    }
+    const [data, action, pending] = useActionState(handleAction, completeForm)
 
     return <>
         <div className="navbar flex items-center justify-between px-12 pt-8">
@@ -39,17 +54,18 @@ const CompleteYourPage = () => {
 
                 <div className="container mt-12 flex gap-24 pl-10">
                     <div className="space-y-5">
-                        <div className="img-cont rounded-full w-50 h-50">
+                        <div className="img-cont rounded-full w-50 h-50 overflow-hidden border">
                             <Image
-                                className="object-contain invert"
-                                src={"/profile.svg"}
+                                className="object-contain"
+                                src={profilepic || "/profile.svg"}
+                                accept="image/*"
                                 width={1000}
                                 height={1000}
                                 alt="profile"
                             />
                         </div>
                         <div className="upload-btn w-fit">
-                            <label htmlFor="img-upload" className="flex items-center gap-2 border border-white rounded-full px-3 py-2">
+                            <label htmlFor="img-upload" className="flex items-center gap-2 border border-white hover:border-gray-300 hover:text-gray-300 rounded-full px-3 py-2 cursor-pointer">
                                 <Image
                                     src={"/camera.svg"}
                                     width={20}
@@ -58,18 +74,18 @@ const CompleteYourPage = () => {
                                 />
                                 <span>Upload profile photo</span>
                             </label>
-                            <input type="file" id="img-upload" style={{ display: "none" }}/>
+                            <input type="file" name="profilePic" id="img-upload" style={{ display: "none" }} required onChange={handleChange}/>
                         </div>
                     </div>
 
                     <div className="w-100 space-y-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="name">Name</label>
-                            <input type="text" placeholder="Name" id="name" className="bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4"/>
+                            <input type="text" placeholder="Name" id="name" name="name" className="bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" required/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="about">About</label>
-                            <textarea name="About" id="about" placeholder="Write about your passion and what drives you. Explain how contributions can make a difference in your work and create a connection with your supporters…" className="h-36 resize-none bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" cols={40}/>
+                            <textarea name="About" id="about" placeholder="Write about your passion and what drives you. Explain how contributions can make a difference in your work and create a connection with your supporters…" className="h-36 resize-none bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" cols={40} required/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="social">Website or social link</label>
@@ -87,7 +103,8 @@ const CompleteYourPage = () => {
                     <div className="bar-1 h-1 w-full bg-black"></div>
                 </div>
                 <div className="w-full flex items-center justify-end my-5 pr-15">
-                    <Link href={"/setup-payout"} className="text-center cursor-pointer bg-[#181921] hover:bg-[#0d0d12] py-4 px-12 rounded-full">Next</Link>
+                    <button className="text-center cursor-pointer bg-[#181921] hover:bg-[#0d0d12] py-4 px-12 rounded-full"
+                    onClick={action}>Next</button>
                 </div>
             </div>
         </div>
