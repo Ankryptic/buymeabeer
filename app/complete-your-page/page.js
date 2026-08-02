@@ -3,18 +3,28 @@ import React, { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
+import { completeHardNavigation } from "next/dist/client/components/segment-cache/navigation";
 
 const CompleteYourPage = () => {
     const { data: session, status } = useSession()
-    const [profilepic, setProfilePic] = useState("")
+    const [profpic, setProfPic] = useState("")
     const [completeForm, setCompleteForm] = useState({
         profilePic: "",
         name: "",
         about: "",
         social: "",
     })
+    const [error, setError] = useState({})
 
-    const handleChange = (e) => {
+
+    // Function to validate form
+    const validate = () => {
+        return false;
+    }
+
+
+    // handle profile pic upload action
+    const handleUpload = (e) => {
         const file = e.target.files[0];
         console.log(file.type)
 
@@ -22,13 +32,24 @@ const CompleteYourPage = () => {
         else if(!(file.type).startsWith("image/")) return;
 
         const url = URL.createObjectURL(file)
-        setProfilePic(url)
+        setProfPic(url)
+        setCompleteForm({ ...completeForm, profilePic: url})
     }
 
-    const handleAction = (prev, payload, e) => {
-        console.log("Clicked")
-        console.log(pending)
+
+    // Handle the Form
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCompleteForm({ ...completeForm, [name]: value})
+        console.log(completeForm)
     }
+
+    // handle next button click
+    const handleAction = (prev, e) => {
+        if(validate()) console.log("Validated")
+        else if(!validate()) console.log("Not Validated")
+    }
+
     const [data, action, pending] = useActionState(handleAction, completeForm)
 
     return <>
@@ -57,7 +78,7 @@ const CompleteYourPage = () => {
                         <div className="img-cont rounded-full w-50 h-50 overflow-hidden border">
                             <Image
                                 className="object-contain"
-                                src={profilepic || "/profile.svg"}
+                                src={profpic || "/profile.svg"}
                                 accept="image/*"
                                 width={1000}
                                 height={1000}
@@ -74,22 +95,22 @@ const CompleteYourPage = () => {
                                 />
                                 <span>Upload profile photo</span>
                             </label>
-                            <input type="file" name="profilePic" id="img-upload" style={{ display: "none" }} required onChange={handleChange}/>
+                            <input type="file" name="profilePic" id="img-upload" style={{ display: "none" }} required onChange={handleUpload}/>
                         </div>
                     </div>
 
                     <div className="w-100 space-y-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="name">Name</label>
-                            <input type="text" placeholder="Name" id="name" name="name" className="bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" required/>
+                            <input type="text" placeholder="Name" id="name" name="name" className="bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" required value={completeForm.name} onChange={handleChange}/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="about">About</label>
-                            <textarea name="About" id="about" placeholder="Write about your passion and what drives you. Explain how contributions can make a difference in your work and create a connection with your supporters…" className="h-36 resize-none bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" cols={40} required/>
+                            <textarea name="about" id="about" placeholder="Write about your passion and what drives you. Explain how contributions can make a difference in your work and create a connection with your supporters…" className="h-36 resize-none bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" cols={40} required value={completeForm.about} onChange={handleChange}/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="social">Website or social link</label>
-                            <input type="text" placeholder="https://" id="social" className="bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4"/>
+                            <input type="text" placeholder="https://" id="social" name="social" className="bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-4 py-4" value={completeForm.social} onChange={handleChange}/>
                         </div>
                     </div>
                 </div>
