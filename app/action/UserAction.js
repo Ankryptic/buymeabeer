@@ -4,6 +4,7 @@ import { Handler } from "../api/auth/[...nextauth]/route";
 import UserDb from "../db/userDB";
 import User from "@/models/User";
 
+
 // For validating data in Server
 export const isValid = async(formData) => {
     const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/
@@ -33,23 +34,31 @@ export const isValid = async(formData) => {
 // Check Validation and Then Update Complete your page data in the Database
 export const updateCompletePage = async(formData) => {
 
-    const valid = await isValid(formData);
+    const result = await isValid(formData);
 
-    if (valid) {
+    if (result.succes) {
 
         // Connect to DB
         await UserDb();
 
         const session = await getServerSession(Handler)
-        console.log(session)
 
         // Update the data
-        const dbUser = await User.findOne({ email: session?.user.email})
-        console.log(dbUser.toObject()) 
+        const dbUser = await User.findOneAndUpdate({ email: session?.user.email},
+            {
+                name: formData.name,
+                profilePic: formData.profilePic,
+                about: formData.about,
+                socialLink: formData.social,
+                profileCompleted: true
+            }
+        )
+        console.log(dbUser.toObject())
+        return result;
 
     }
     else {  // if not isvalid then throw Error
-        console.log("Not Valid")
+        return result.newErrors;
     }
 
 }

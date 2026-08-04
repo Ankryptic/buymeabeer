@@ -52,7 +52,7 @@ const CompleteYourPage = () => {
 
         const url = URL.createObjectURL(file)
         setProfPic(url)
-        setCompleteForm({ ...completeForm, profilePic: file })
+        setCompleteForm({ ...completeForm, profilePic: url})
     }
 
 
