@@ -1,8 +1,9 @@
 "use client"
-import React, { useActionState, useEffect, useState } from "react";
+import React, { startTransition, useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
+import { updateCompletePage } from "../action/UserAction";
 
 const CompleteYourPage = () => {
     const { data: session, status } = useSession()
@@ -51,7 +52,7 @@ const CompleteYourPage = () => {
 
         const url = URL.createObjectURL(file)
         setProfPic(url)
-        setCompleteForm({ ...completeForm, profilePic: url })
+        setCompleteForm({ ...completeForm, profilePic: file })
     }
 
 
@@ -62,15 +63,14 @@ const CompleteYourPage = () => {
         console.log(completeForm)
     }
 
+    const updateData = async () => {
+        await updateCompletePage(completeForm)
+    }
+
     // handle next button click
     const handleAction = (prev, e) => {
         if (validate()) {
-            console.log(error)
-            console.log("Validated")
-        }
-        else if (!validate()) {
-            console.log(error)
-            console.log("Not Validated")
+           startTransition(updateData)
         }
     }
 
