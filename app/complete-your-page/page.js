@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { updateCompletePage } from "../action/UserAction";
+import { useRouter } from "next/navigation";
 
 const CompleteYourPage = () => {
     const { data: session, status } = useSession()
@@ -15,6 +16,7 @@ const CompleteYourPage = () => {
         social: "",
     })
     const [error, setError] = useState({})
+    const router = useRouter()
 
 
     // Function to validate form
@@ -64,7 +66,14 @@ const CompleteYourPage = () => {
     }
 
     const updateData = async () => {
-        await updateCompletePage(completeForm)
+        const result = await updateCompletePage(completeForm)
+
+        if(result.succes){
+            router.push("/setup-payout")
+        }
+        else{
+            throw Error(result.newErrors)
+        }
     }
 
     // handle next button click
@@ -151,7 +160,7 @@ const CompleteYourPage = () => {
                     <div className="bar-1 h-1 w-full bg-black"></div>
                 </div>
                 <div className="w-full flex items-center justify-end my-2 pr-15">
-                    <button className="text-center cursor-pointer bg-[#181921] hover:bg-[#0d0d12] py-4 px-12 rounded-full"
+                    <button className="text-center cursor-pointer bg-[#181921] hover:bg-[#0d0d12] py-4 px-12 rounded-full" disabled={pending}
                         onClick={action}>Next</button>
                 </div>
             </div>
