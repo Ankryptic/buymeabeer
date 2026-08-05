@@ -53,7 +53,6 @@ export const updateCompletePage = async(formData) => {
                 profileCompleted: true
             }
         )
-        console.log(dbUser.toObject())
         return result;
 
     }
