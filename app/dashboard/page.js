@@ -28,7 +28,7 @@ const Dashboard = () => {
 
                     <div className="sideNav sticky top-0 h-17">
                         <div className="logo">
-                            <Link href={"/"}>
+                            <Link href={"/dashboard"}>
                                 <Image
                                     src={"/cheers_noBG.gif"}
                                     width={60}
@@ -177,10 +177,10 @@ const Dashboard = () => {
                                 "opacity-0 max-h-0 p-0"
                             }
                         `}>
-                            <Link href={"/"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">View my page</Link>
-                            <Link href={"/"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">Dashboard</Link>
-                            <Link href={"/"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">My account</Link>
-                            <Link href={"/"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">Refer a creator</Link>
+                            <Link href={`/${username}`} target='_blank' className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">View my page</Link>
+                            <Link href={"/dashboard"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">Dashboard</Link>
+                            <Link href={"#"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">My account</Link>
+                            <Link href={"#"} className="hover:bg-[#3b354f] py-2 px-2 rounded-lg">Refer a creator</Link>
                             <button type="button" className="hover:bg-[#3b354f] py-2 px-2 rounded-lg text-start text-gray-300 cursor-pointer" onClick={() => {signOut()}}><span>Logout</span></button>
                         </div>
                     </div>
