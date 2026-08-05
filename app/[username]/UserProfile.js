@@ -1,8 +1,17 @@
 "use client"
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const UserProfile = ({ showEdit, setShowEdit }) => {
+    const { data: session, status } = useSession()
+    const [authenticated, setAuthenticated] = useState(false)
+
+    useEffect(() => {
+        if(status === "authenticated"){
+            setAuthenticated(false)
+        }
+    }, [status, session])
 
     const handleCancel = () => {
         setShowEdit(false);
@@ -21,7 +30,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
                         alt="cover-pic"
                     />
                 </div>
-                <label className="relative -top-5 z-1 flex items-center gap-2 bg-gray-200 text-black px-4 py-2 rounded-xl cursor-pointer" htmlFor="upload_cover">
+                {authenticated && <div><label className="relative -top-5 z-1 flex items-center gap-2 bg-gray-200 text-black px-4 py-2 rounded-xl cursor-pointer" htmlFor="upload_cover">
                     <Image
                         className=""
                         src={"/image_icon.svg"}
@@ -31,7 +40,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
                     />
                     <span className="font-semibold text-sm">Add cover image</span>
                 </label>
-                <input type="file" id="upload_cover" style={{ display: "none" }} />
+                <input type="file" id="upload_cover" style={{ display: "none" }} /> </div>}
             </div>
 
             <div className="mt-25 w-full flex justify-center gap-2">
@@ -40,7 +49,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
 
                     <div className="flex items-center justify-between">
                         <span className="font-semibold">About Shreeraj</span>
-                        <button type="buton" className="underline hover:no-underline text-sm cursor-pointer" onClick={() => setShowEdit(!showEdit)}>Edit</button>
+                        {authenticated && <button type="buton" className="underline hover:no-underline text-sm cursor-pointer" onClick={() => setShowEdit(!showEdit)}>Edit</button>}
                     </div>
 
                     <div>
