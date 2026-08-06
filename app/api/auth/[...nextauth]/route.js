@@ -33,7 +33,7 @@ export const Handler = NextAuth({
 
         // Create new user account
         await User.create({
-          username: user.email.split("@")[0],
+          username: user.email.split("@")[0].toLowerCase().replace(/[^a-zA-Z0-9]/g, ""),
           email: user.email,
         })
 
@@ -56,6 +56,11 @@ export const Handler = NextAuth({
     },
 
     async session({ session, token }){
+      await UserDb()
+
+      const dbUser = await User.findOne({ email: session?.user.email})
+
+      session.user.username = dbUser.username
       session.user.profileCompleted = token.profileCompleted
       return session;
     }

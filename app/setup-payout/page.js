@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const countryList = [
     {
@@ -40,6 +41,7 @@ const SetupPayout = () => {
     const [searchRes, setSearchRes] = useState('')
     const searchInput = useRef(null)
     const [afterSkip, setAfterSkip] = useState(false)
+    const { data: session } = useSession()
 
 
     // Filters the Country List
@@ -197,7 +199,7 @@ const SetupPayout = () => {
 
                     <div className="buttons flex items-center my-6 gap-2">
                         <button className="text-center text-sm w-full cursor-pointer bg-[#181921] hover:bg-[#0d0d12] py-4 px-12 rounded-full" onClick={() => setAfterSkip(false)}>Connect</button>
-                        <Link href={"/"} className="text-center text-sm w-full cursor-pointer bg-[#5b5570] hover:bg-[#3b354f] py-4 px-6 rounded-full">Got it! I'll do this later</Link>
+                        <Link href={`/${session?.user.username}`} className="text-center text-sm w-full cursor-pointer bg-[#5b5570] hover:bg-[#3b354f] py-4 px-6 rounded-full">Got it! I'll do this later</Link>
                     </div>
                 </div>
 
