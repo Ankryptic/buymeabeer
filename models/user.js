@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     password: { type: String},
     name: { type: String},
     profileCompleted: { type: Boolean, default: false },
+    setupPayout: { type: Boolean, default: false },
     about: { type: String},
     socialLink: { type: String},
     profilePic: { type: String },
