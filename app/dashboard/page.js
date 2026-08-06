@@ -19,7 +19,7 @@ const Dashboard = () => {
     }, [status, router]);
 
     if (session) {
-        const username = session.user.name.toLowerCase().trim().replace(/\s+/g, "")
+        const username = session.user.username
 
         return (
             <div className='flex w-full min-h-screen text-white'>

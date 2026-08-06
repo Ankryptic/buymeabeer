@@ -5,21 +5,12 @@ import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 
 
-const UserNav = ({ username, setShowEdit }) => {
+const UserNav = ({ username, setShowEdit, userData }) => {
     const [proDropdown, setProDropdown] = useState(false);
     const { data: session, status } = useSession()
-    const [authenticated, setAuthenticated] = useState(true)
     const [dotDropdown, setDotDropdown] = useState(false)
-    const profilePic  = session?.user.image
-    const name = session?.user.name
+    const isOwner = status === "authenticated" && session?.user.username === userData?.username
     
-
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            console.log("unathenticateds")
-            setAuthenticated(false)
-        }
-    }, [status, session])
 
     return (
         <nav className="flex items-center justify-between w-full h-18 px-6 bg-[#181921] text-white">
@@ -28,17 +19,17 @@ const UserNav = ({ username, setShowEdit }) => {
                 <div className="relative user-image w-12 h-12 border border-white overflow-hidden rounded-lg">
                     <Image
                         className="object-contain"
-                        src={profilePic || "/profile.svg"}
+                        src={userData?.profilePic || "/profile.svg"}
                         width={50}
                         height={50}
                         alt="profile-logo"
                     />
                 </div>
-                <div className="username font-bold text-lg">{name}</div>
+                <div className="username font-bold text-lg">{userData?.name}</div>
                 {/* <div className="username font-bold text-lg">{ username }</div> */}
             </div>
 
-            {authenticated && <div className="flex items-center gap-3">
+            {isOwner && <div className="flex items-center gap-3">
                 <button className="p-2 border border-[#5b5570] hover:bg-[#5b5570] rounded-full cursor-pointer">
                     <Image
                         className="invert"
@@ -61,7 +52,7 @@ const UserNav = ({ username, setShowEdit }) => {
                         <span>&#9776;</span>
                         <Image
                             className="rounded-full"
-                            src={session?.user.image || "/profile.svg"}
+                            src={"/profile.svg"}
                             width={20}
                             height={20}
                             alt="profile-logo"
@@ -83,7 +74,7 @@ const UserNav = ({ username, setShowEdit }) => {
 
             </div>}
 
-            {!authenticated && <div className="flex items-center gap-6 pr-2">
+            {!isOwner && <div className="flex items-center gap-6 pr-2">
                 <div className="relative">
                     <button className="cursor-pointer hover:bg-gray-700 px-2 py-1 rounded-full" 
                         onClick={() => {setDotDropdown(!dotDropdown)}} aria-haspopup="menu" aria-expanded={dotDropdown} onBlur={() => {setDotDropdown(false)}} 

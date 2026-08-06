@@ -3,18 +3,16 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
-const UserProfile = ({ showEdit, setShowEdit }) => {
+const UserProfile = ({ showEdit, setShowEdit, userData }) => {
     const { data: session, status } = useSession()
-    const [authenticated, setAuthenticated] = useState(false)
-
-    useEffect(() => {
-        if(status === "authenticated"){
-            setAuthenticated(false)
-        }
-    }, [status, session])
+    const isOwner = status === "authenticated" && session?.user.username === userData?.username;
 
     const handleCancel = () => {
         setShowEdit(false);
+    }
+
+    if (status === "loading") {
+        return null
     }
 
     return <>
@@ -30,7 +28,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
                         alt="cover-pic"
                     />
                 </div>
-                {authenticated && <div><label className="relative -top-5 z-1 flex items-center gap-2 bg-gray-200 text-black px-4 py-2 rounded-xl cursor-pointer" htmlFor="upload_cover">
+                {isOwner && <div><label className="relative -top-5 z-1 flex items-center gap-2 bg-gray-200 text-black px-4 py-2 rounded-xl cursor-pointer" htmlFor="upload_cover">
                     <Image
                         className=""
                         src={"/image_icon.svg"}
@@ -40,7 +38,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
                     />
                     <span className="font-semibold text-sm">Add cover image</span>
                 </label>
-                <input type="file" id="upload_cover" style={{ display: "none" }} /> </div>}
+                    <input type="file" id="upload_cover" style={{ display: "none" }} /> </div>}
             </div>
 
             <div className="mt-25 w-full flex justify-center gap-2">
@@ -48,12 +46,12 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
                 <div className="box1 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
 
                     <div className="flex items-center justify-between">
-                        <span className="font-semibold">About Shreeraj</span>
-                        {authenticated && <button type="buton" className="underline hover:no-underline text-sm cursor-pointer" onClick={() => setShowEdit(!showEdit)}>Edit</button>}
+                        <span className="font-semibold">About {userData?.name.split(" ")[0]}</span>
+                        {isOwner && <button type="buton" className="underline hover:no-underline text-sm cursor-pointer" onClick={() => setShowEdit(!showEdit)}>Edit</button>}
                     </div>
 
                     <div>
-                        <span className="text-gray-300">AI Engineer</span>
+                        <span className="text-gray-300">{userData?.about}</span>
                     </div>
 
                     <hr className="text-gray-300" />
@@ -71,7 +69,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
                 <div className="box2 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
 
                     <div className="flex items-center justify-between">
-                        <span className="font-semibold">Follow Shreeraj</span>
+                        <span className="font-semibold">Follow {userData?.name.split(" ")[0]}</span>
                     </div>
 
                     <div>
@@ -93,7 +91,7 @@ const UserProfile = ({ showEdit, setShowEdit }) => {
         </div>
 
         {/* Edit Section */}
-        { showEdit && <div className="absolute w-full min-h-screen z-21 top-2 p-4 bg-[#000000c3] text-white">
+        {showEdit && <div className="absolute w-full min-h-screen z-21 top-2 p-4 bg-[#000000c3] text-white">
             <div className="min-h-screen bg-[#3b354f] text-white rounded-2xl pb-20">
 
                 <nav className="sticky top-0 z-22 flex items-center justify-between w-full h-20 bg-[#3b354f] border-b border-b-white px-10 rounded-t-2xl">

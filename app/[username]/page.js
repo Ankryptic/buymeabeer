@@ -2,14 +2,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ProfilePage from "./ProfilePage";
+import { getUserData } from "../action/UserAction";
 
 const Username = async ({ params }) => {
     const { username } = await params;
+    const userData = await getUserData(username)
 
     return (
         <div className="relative h-screen">
 
-            <ProfilePage username={username} />
+            <ProfilePage username={username} userData={userData} />
 
             <footer className="absolute w-full bottom-0 h-22 flex flex-col items-center gap-3">
                 <div className="text-gray-300 flex items-center justify-center gap-5">

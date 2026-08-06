@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { Handler } from "../api/auth/[...nextauth]/route";
 import UserDb from "../db/userDB";
 import User from "@/models/User";
+import { createExhaustiveURLSearchParamsProxy } from "next/dist/server/app-render/instant-validation/instant-samples";
 
 
 // For validating data in Server
@@ -60,4 +61,24 @@ export const updateCompletePage = async(formData) => {
         return result.newErrors;
     }
 
+}
+
+export const getUserData = async(username) => {
+    await UserDb()
+
+    const dbUser = await User.findOne({ username: username})
+
+    if(dbUser){
+        return {
+            name: dbUser.name,
+            username: dbUser.username,
+            profilePic: dbUser.profilePic,
+            profileCompleted: dbUser.profileCompleted,
+            about: dbUser.about,
+            socialLink: dbUser.socialLink
+        }
+    }
+    else{
+        throw Error("User Not Fount");
+    }
 }
