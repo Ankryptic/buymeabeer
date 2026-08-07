@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,7 +8,7 @@ const Sidebar = ({ currentPage }) => {
     const [publish, setPublish] = useState(false);
     const { data: session } = useSession();
     
-    return <div className="fixed top-0 overflow-y-auto overflow-x-hidden scrollbar-none sidebar w-[16%] h-screen bg-[#2f2d41] px-4 space-y-1">
+    return <div className="fixed top-0 overflow-y-auto overflow-x-hidden scrollbar-none sidebar w-[16%] h-screen bg-[#2f2d41] px-4 space-y-1 text-white">
     
                         <div className="sideNav sticky top-0 h-17">
                             <div className="logo">
@@ -22,7 +23,7 @@ const Sidebar = ({ currentPage }) => {
                             </div>
                         </div>
     
-                        <Link href={"/dashboard"} className={`flex w-full ${currentPage === "home" ? "bg-[#5b5570]" : ""} py-3 px-5 rounded-xl text-sm font-light cursor-pointer`}>
+                        <Link href={"/dashboard"} className={`flex w-full ${currentPage === "home" ? "bg-[#5b5570]" : ""} hover:bg-[#5b5570] py-3 px-5 rounded-xl text-sm font-light cursor-pointer`}>
                             <span>Home</span>
                         </Link>
                         <Link href={`/${session?.user.username}`} target='_blank' className='flex w-full hover:bg-[#5b5570] py-3 px-5 rounded-xl text-sm font-light cursor-pointer'>
@@ -65,7 +66,7 @@ const Sidebar = ({ currentPage }) => {
                         <Link href={"#"} className='flex w-full hover:bg-[#5b5570] py-3 px-5 rounded-xl text-sm font-light cursor-pointer'>
                             <span>Integration</span>
                         </Link>
-                        <Link href={"#"} className='flex w-full hover:bg-[#5b5570] py-3 px-5 rounded-xl text-sm font-light cursor-pointer'>
+                        <Link href={"/payout-settings"} className={`flex w-full ${currentPage === "payout" ? "bg-[#5b5570]" : ""} hover:bg-[#5b5570] py-3 px-5 rounded-xl text-sm font-light cursor-pointer`}>
                             <span>Payout</span>
                         </Link>
                         <Link href={"#"} className='flex w-full hover:bg-[#5b5570] py-3 px-5 rounded-xl text-sm font-light cursor-pointer'>
