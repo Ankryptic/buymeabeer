@@ -2,10 +2,16 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { Radio, RadioGroup } from "@/context/RadioContext";
 
 const UserProfile = ({ showEdit, setShowEdit, userData }) => {
     const { data: session, status } = useSession()
+    const [multiplier, setMultiplier] = useState(1)
     const isOwner = status === "authenticated" && session?.user.username === userData?.username;
+
+    useEffect(() => {
+        console.log(multiplier)
+    }, [multiplier])
 
     const handleCancel = () => {
         setShowEdit(false);
@@ -82,6 +88,46 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
 
                     <div>
                         <button type="button" className="w-full bg-[#181921] hover:bg-[#222130] cursor-pointer px-4 py-4 rounded-full">Follow</button>
+                    </div>
+
+                </div>
+
+                <div className="box3 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-4">
+                    <div className="font-semisbold text-xl">Buy {userData.name} a beer</div>
+                    <div className="w-full flex items-center rounded-2xl bg-[#2f2d41] border-2 border-[#0d0d12] px-2.5 py-5 mt-8">
+                        <Image
+                            className="mx-8"
+                            src="/beer_mug.png"
+                            width={50}
+                            height={50}
+                            alt="beer mug pic"
+                        />
+                        <span className="text-slate-300 font-bold mr-8">X</span>
+                        <RadioGroup value={multiplier} onChange={(e) => setMultiplier(Number(e.target.value))}>
+                            <div className="flex gap-3">
+                                <Radio value={1}>1</Radio>
+                                <Radio value={3}>3</Radio>
+                                <Radio value={5}>5</Radio>
+                            </div>
+                        </RadioGroup>
+                        <input type="number" name="multiply" id="multiply" className="bg-[#3b354f] w-10 h-10 p-2 rounded-lg border-2 border-[#181921] ml-4 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        onChange={(e) => setMultiplier(Number(e.target.value))}
+                        />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Name or @yoursocial (optional)" className="w-full bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
+                    </div>
+                    <div>
+                        <textarea name="message" id="message" placeholder="Say Something nice..." className="w-full h-32 resize-none bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <input type="checkbox" name="monthly" id="monthly" className="" />
+                        <label htmlFor="monthly" className="text-sm text-gray-400">Make this monthly</label>
+                    </div>
+                    <div>
+                        <button type="button" className="w-full bg-[#181921] hover:bg-[#222130] cursor-pointer px-4 py-4 rounded-full">
+                            <span>₹{20 * multiplier}</span>
+                        </button>
                     </div>
 
                 </div>

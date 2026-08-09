@@ -47,7 +47,6 @@ const CompleteYourPage = () => {
     // handle profile pic upload action
     const handleUpload = (e) => {
         const file = e.target.files[0];
-        console.log(file.type)
 
         if (!file) return;
         else if (!(file.type).startsWith("image/")) return;
@@ -62,7 +61,6 @@ const CompleteYourPage = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setCompleteForm({ ...completeForm, [name]: value })
-        console.log(completeForm)
     }
 
     const updateData = async () => {

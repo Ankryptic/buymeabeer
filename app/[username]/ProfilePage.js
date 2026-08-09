@@ -5,7 +5,6 @@ import UserProfile from "./UserProfile";
 
 const ProfilePage = ({ username , userData}) => {
     const [showEdit, setShowEdit]= useState(false)
-    console.log(userData)
 
     return <>
 
