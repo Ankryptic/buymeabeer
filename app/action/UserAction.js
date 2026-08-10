@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { Handler } from "../api/auth/[...nextauth]/route";
 import UserDb from "../db/userDB";
 import User from "@/models/User";
-import { createExhaustiveURLSearchParamsProxy } from "next/dist/server/app-render/instant-validation/instant-samples";
 
 
 // For validating data in Server
@@ -51,7 +50,8 @@ export const updateCompletePage = async(formData) => {
                 profilePic: formData.profilePic,
                 about: formData.about,
                 socialLink: formData.social,
-                profileCompleted: true
+                profileCompleted: true,
+                setupPayout: true,
             }
         )
         return result;
@@ -75,7 +75,8 @@ export const getUserData = async(username) => {
             profilePic: dbUser.profilePic,
             profileCompleted: dbUser.profileCompleted,
             about: dbUser.about,
-            socialLink: dbUser.socialLink
+            socialLink: dbUser.socialLink,
+            setupPayout: dbUser.setupPayout,
         }
     }
     else{

@@ -7,13 +7,14 @@ import { getUserData } from "../action/UserAction";
 const Username = async ({ params }) => {
     const { username } = await params;
     const userData = await getUserData(username)
+    console.log(userData)
 
     return (
-        <div className="relative h-screen">
+        <div className="">
 
             <ProfilePage username={username} userData={userData} />
 
-            <footer className="absolute w-full bottom-0 h-22 flex flex-col items-center gap-3">
+            <footer className="w-full h-22 flex flex-col items-center gap-3 mt-10">
                 <div className="text-gray-300 flex items-center justify-center gap-5">
                     <button type="button" className="flex items-center gap-2 hover:underline">
                         <Image

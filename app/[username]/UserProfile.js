@@ -9,10 +9,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
     const [multiplier, setMultiplier] = useState(1)
     const isOwner = status === "authenticated" && session?.user.username === userData?.username;
 
-    useEffect(() => {
-        console.log(multiplier)
-    }, [multiplier])
-
+    
     const handleCancel = () => {
         setShowEdit(false);
     }
@@ -22,7 +19,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
     }
 
     return <>
-        <div className="main relative z-1 flex items-center justify-center w-full h-[72vh] text-white">
+        <div className="main relative z-1 flex items-center justify-center w-full min-h-[72vh] text-white">
 
             {/* Cover Image */}
             <div className="absolute top-0 w-full -z-10 cover-pic flex items-center justify-center bg-red-300 h-50">
@@ -47,7 +44,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
                     <input type="file" id="upload_cover" style={{ display: "none" }} /> </div>}
             </div>
 
-            <div className="mt-25 w-full flex justify-center gap-2">
+            <div className="mt-30 w-full flex justify-center gap-2">
 
                 <div className="box1 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
 
@@ -72,7 +69,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
 
                 </div>
 
-                <div className="box2 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
+                {!userData.setupPayout ? <div className="box2 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-6">
 
                     <div className="flex items-center justify-between">
                         <span className="font-semibold">Follow {userData?.name.split(" ")[0]}</span>
@@ -90,16 +87,16 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
                         <button type="button" className="w-full bg-[#181921] hover:bg-[#222130] cursor-pointer px-4 py-4 rounded-full">Follow</button>
                     </div>
 
-                </div>
+                </div> : 
 
-                <div className="box3 bg-[#2f2d41] rounded-3xl p-8 w-130 h-fit space-y-4">
+                <div className="box3 bg-[#2f2d41] rounded-3xl p-8 w-120 h-fit space-y-4">
                     <div className="font-semisbold text-xl">Buy {userData.name} a beer</div>
-                    <div className="w-full flex items-center rounded-2xl bg-[#2f2d41] border-2 border-[#0d0d12] px-2.5 py-5 mt-8">
+                    <div className="w-full flex items-center rounded-2xl bg-[#2f2d41] border-2 border-[#0d0d12] px-2.5 py-4 mt-6">
                         <Image
                             className="mx-8"
                             src="/beer_mug.png"
-                            width={50}
-                            height={50}
+                            width={40}
+                            height={40}
                             alt="beer mug pic"
                         />
                         <span className="text-slate-300 font-bold mr-8">X</span>
@@ -130,7 +127,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
                         </button>
                     </div>
 
-                </div>
+                </div> }
 
             </div>
 
