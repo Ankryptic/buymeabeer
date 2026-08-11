@@ -3,15 +3,56 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { Radio, RadioGroup } from "@/context/RadioContext";
+import Script from "next/script";
+import { intitPayment } from "../action/UserAction";
 
 const UserProfile = ({ showEdit, setShowEdit, userData }) => {
     const { data: session, status } = useSession()
     const [multiplier, setMultiplier] = useState(1)
     const isOwner = status === "authenticated" && session?.user.username === userData?.username;
+    const [paymentForm, setPaymentForm] = useState({
+        name: "",
+        message: "",
+    })
+    const amount = 20 * multiplier;
 
-    
+
     const handleCancel = () => {
         setShowEdit(false);
+    }
+
+    const handleChange = (e) => {
+        setPaymentForm({ ...paymentForm, [e.target.name]: e.target.value })
+    }
+
+    const pay = async() => {
+        let order = await intitPayment(amount, userData.username, paymentForm)
+
+        console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
+
+        var options = {
+            "key": process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+            "amount": amount * 100, // Amount is in currency subunits. 
+            "currency": "INR",
+            "name": "Buy Me A Beer", //your business name
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "callback_url":`${process.env.NEXTAUTH_URL}/api/razorpay`,
+            "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+                "name": paymentForm.name,
+                "contact": "+919876543210" //Provide the customer's phone number for better conversion rates 
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
     }
 
     if (status === "loading") {
@@ -19,6 +60,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
     }
 
     return <>
+        <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
         <div className="main relative z-1 flex items-center justify-center w-full min-h-[72vh] text-white">
 
             {/* Cover Image */}
@@ -87,47 +129,47 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
                         <button type="button" className="w-full bg-[#181921] hover:bg-[#222130] cursor-pointer px-4 py-4 rounded-full">Follow</button>
                     </div>
 
-                </div> : 
+                </div> :
 
-                <div className="box3 bg-[#2f2d41] rounded-3xl p-8 w-120 h-fit space-y-4">
-                    <div className="font-semisbold text-xl">Buy {userData.name} a beer</div>
-                    <div className="w-full flex items-center rounded-2xl bg-[#2f2d41] border-2 border-[#0d0d12] px-2.5 py-4 mt-6">
-                        <Image
-                            className="mx-8"
-                            src="/beer_mug.png"
-                            width={40}
-                            height={40}
-                            alt="beer mug pic"
-                        />
-                        <span className="text-slate-300 font-bold mr-8">X</span>
-                        <RadioGroup value={multiplier} onChange={(e) => setMultiplier(Number(e.target.value))}>
-                            <div className="flex gap-3">
-                                <Radio value={1}>1</Radio>
-                                <Radio value={3}>3</Radio>
-                                <Radio value={5}>5</Radio>
-                            </div>
-                        </RadioGroup>
-                        <input type="number" name="multiply" id="multiply" className="bg-[#3b354f] w-10 h-10 p-2 rounded-lg border-2 border-[#181921] ml-4 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        onChange={(e) => setMultiplier(Number(e.target.value))}
-                        />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Name or @yoursocial (optional)" className="w-full bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
-                    </div>
-                    <div>
-                        <textarea name="message" id="message" placeholder="Say Something nice..." className="w-full h-32 resize-none bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <input type="checkbox" name="monthly" id="monthly" className="" />
-                        <label htmlFor="monthly" className="text-sm text-gray-400">Make this monthly</label>
-                    </div>
-                    <div>
-                        <button type="button" className="w-full bg-[#181921] hover:bg-[#222130] cursor-pointer px-4 py-4 rounded-full">
-                            <span>₹{20 * multiplier}</span>
-                        </button>
-                    </div>
+                    <div className="box3 bg-[#2f2d41] rounded-3xl p-8 w-120 h-fit space-y-4">
+                        <div className="font-semisbold text-xl">Buy {userData.name} a beer</div>
+                        <div className="w-full flex items-center rounded-2xl bg-[#2f2d41] border-2 border-[#0d0d12] px-2.5 py-4 mt-6">
+                            <Image
+                                className="mx-8"
+                                src="/beer_mug.png"
+                                width={40}
+                                height={40}
+                                alt="beer mug pic"
+                            />
+                            <span className="text-slate-300 font-bold mr-8">X</span>
+                            <RadioGroup value={multiplier} onChange={(e) => setMultiplier(Number(e.target.value))}>
+                                <div className="flex gap-3">
+                                    <Radio value={1}>1</Radio>
+                                    <Radio value={3}>3</Radio>
+                                    <Radio value={5}>5</Radio>
+                                </div>
+                            </RadioGroup>
+                            <input type="number" name="multiply" id="multiply" className="bg-[#3b354f] w-10 h-10 p-2 rounded-lg border-2 border-[#181921] ml-4 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                onChange={(e) => setMultiplier(Number(e.target.value))}
+                            />
+                        </div>
+                        <div>
+                            <input type="text" name="name" placeholder="Name or @yoursocial (optional)" className="w-full bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" value={paymentForm.name} onChange={handleChange} />
+                        </div>
+                        <div>
+                            <textarea name="message" id="message" placeholder="Say Something nice..." className="w-full h-32 resize-none bg-[#3b354f] focus:bg-[#5b5570] px-4 py-4 rounded-xl" value={paymentForm.message} onChange={handleChange} />
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <input type="checkbox" name="monthly" id="monthly" className="" />
+                            <label htmlFor="monthly" className="text-sm text-gray-400">Make this monthly</label>
+                        </div>
+                        <div>
+                            <button type="button" className="w-full bg-[#181921] hover:bg-[#222130] cursor-pointer px-4 py-4 rounded-full" onClick={pay}>
+                                <span>₹{amount}</span>
+                            </button>
+                        </div>
 
-                </div> }
+                    </div>}
 
             </div>
 

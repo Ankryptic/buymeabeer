@@ -7,7 +7,6 @@ import { getUserData } from "../action/UserAction";
 const Username = async ({ params }) => {
     const { username } = await params;
     const userData = await getUserData(username)
-    console.log(userData)
 
     return (
         <div className="">

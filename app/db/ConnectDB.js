@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const UserDb = async() => {
+const ConnectDB = async() => {
     if (mongoose.connection.readyState >= 1) return;
 
     await mongoose.connect('mongodb://localhost:27017/beer')
 }
 
-export default UserDb;
+export default ConnectDB;

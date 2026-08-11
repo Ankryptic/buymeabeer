@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
-import UserDb from "@/app/db/userDB"
+import ConnectDB from "@/app/db/ConnectDB"
 import User from "@/models/User"
 
 export const Handler = NextAuth({
@@ -21,7 +21,7 @@ export const Handler = NextAuth({
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       // Connect Database
-      await UserDb()
+      await ConnectDB()
 
       // check if user is Exist in the database
       const existingUser = await User.findOne({ email: user.email })
@@ -44,7 +44,7 @@ export const Handler = NextAuth({
     },
 
     async jwt({token}) {
-      await UserDb()
+      await ConnectDB()
 
       if(token.email){
         const existingUser = await User.findOne({ email: token.email, });
@@ -56,7 +56,7 @@ export const Handler = NextAuth({
     },
 
     async session({ session, token }){
-      await UserDb()
+      await ConnectDB()
 
       const dbUser = await User.findOne({ email: session?.user.email})
 
