@@ -27,8 +27,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
 
     const pay = async() => {
         let order = await intitPayment(amount, userData.username, paymentForm)
-
-        console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
+        console.log(order.id)
 
         var options = {
             "key": process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
@@ -38,7 +37,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
             "description": "Test Transaction",
             "image": "https://example.com/your_logo",
             "order_id": order.id, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "callback_url":`${process.env.NEXTAUTH_URL}/api/razorpay`,
+            "callback_url":`${process.env.NEXT_PUBLIC_URL}/api/razorpay`,
             "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
                 "name": paymentForm.name,
                 "contact": "+919876543210" //Provide the customer's phone number for better conversion rates 
