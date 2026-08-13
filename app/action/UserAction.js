@@ -111,3 +111,12 @@ export const intitPayment = async (amount, to_username , paymentForm) => {
 
     return order;
 }
+
+
+// Check for is Username valid or exist or not
+export const chkUser = async(username) => {
+    await ConnectDB()
+
+    // Username validation
+    
+}

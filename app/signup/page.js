@@ -10,6 +10,7 @@ const Signup = () => {
     const [username, setUsername] = useState("");
     const [buttonClick, setButtonClick] = useState(0);
     const router = useRouter();
+    const [available, setAvailable] = useState()
 
 
     const handleSignup = () => {
@@ -185,7 +186,10 @@ const Signup = () => {
                     <div className="flex items-center justify-between h-full">
                         <h5 className="text-gray-300 text-[14px]">By continuing, you agree to the <Link className="text-white underline hover:no-underline" href={"/terms"}>terms of service</Link> and <Link className="text-white underline hover:no-underline" href={"/policy"}>privacy policy</Link> .</h5>
 
-                        <button className='cursor-pointer  text-center bg-[#181921] hover:bg-[#0d0d12] px-12 py-4 rounded-full' onClick={() => handleSignup()}>Sign up</button>
+                        <button className={`cursor-pointer text-center bg-[#181921] hover:bg-[#0d0d12] px-12 py-4 rounded-full disabled:bg-[#181921] hover:cursor-not-allowed `} 
+                        disabled={!available} 
+                        onClick={() => handleSignup()}
+                        >Sign up</button>
                     </div>
 
                 </div>

@@ -360,7 +360,7 @@ const HomeContent = () => {
                 <div className="section-5 container m-auto mt-20 bg-[#2f2d41] rounded-[50px] flex flex-col items-center justify-center p-14 w-[80%]">
                     <div className="text-lg">POSTS, AUDIO & EMAIL</div>
                     <h2 className="text-wrap text-6xl font-bold text-center leading-20">Publish your best work</h2>
-                    <p className="text-2xl text-center px-24 leading-10 mt-8">Buy Me a Coffee makes it easy to publish free and exclusive content. Try different formats such as audio, and make it members-only to drive more memberships.</p>
+                    <p className="text-2xl text-center px-24 leading-10 mt-8">Buy Me a Beer makes it easy to publish free and exclusive content. Try different formats such as audio, and make it members-only to drive more memberships.</p>
 
                     <div className="box-1 w-[90%] rounded-4xl mt-14 overflow-hidden">
                         <div className="w-full flex items-center justify-center">
