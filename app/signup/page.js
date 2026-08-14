@@ -25,6 +25,7 @@ const Signup = () => {
 
             if (!chk?.success) {
                 setError(chk?.error)
+                setAvailable(false)
             }
             else if(chk?.success){
                 setError('')
