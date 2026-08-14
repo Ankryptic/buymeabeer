@@ -118,5 +118,21 @@ export const chkUser = async(username) => {
     await ConnectDB()
 
     // Username validation
-    
+    const pattern = /^[a-zA-Z][a-zA-Z0-9_]{3,15}$/;
+    let test = pattern.test(username);
+
+    if(!test){
+        return {success: false, error: "Username may only contain letters, numbers and '_' underscore" }
+    }
+    else if(test){
+        // check for database availability
+        let u = await User.findOne({ username: username })
+
+        if(!u){
+            return {success: true}
+        }
+        else if(u){
+            return {success: false, error: "Username not available"}
+        }
+    }
 }

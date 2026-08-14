@@ -1,21 +1,45 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { chkUser } from "../action/UserAction";
 
 const Signup = () => {
     const { data: session } = useSession()
     const [username, setUsername] = useState("");
     const [buttonClick, setButtonClick] = useState(0);
     const router = useRouter();
-    const [available, setAvailable] = useState()
+    const [available, setAvailable] = useState(false)
+    const [error, setError] = useState('')
 
 
     const handleSignup = () => {
-        buttonClick === 0 ? setButtonClick(1) : buttonClick === 1 ? router.push("/complete-your-page") : setButtonClick(0); 
+        buttonClick === 0 ? setButtonClick(1) : buttonClick === 1 ? router.push("/complete-your-page") : setButtonClick(0);
     }
+
+    const validateUser = async() => {
+        if (username.length > 3) {
+            let chk = await chkUser(username)
+
+            if (!chk?.success) {
+                setError(chk?.error)
+            }
+            else if(chk?.success){
+                setError('')
+                setAvailable(true)
+            }
+        }
+    }
+
+    const handleChange = async (e) => {
+        setUsername(e.target.value)
+    }
+
+    useEffect(() => {
+        validateUser()
+    }, [username])
 
     return (
         <div className="w-full flex bg-[#2f2d41] text-white">
@@ -65,8 +89,10 @@ const Signup = () => {
                         <div className="text-gray-300">Choose a username for your page.</div>
                         <div className="user-input flex items-center bg-[#2f2d41] hover:bg-[#3b354f] cursor-text w-full rounded-2xl px-6 py-4 gap-2 mt-4">
                             <span>buymeabeer.com/</span>
-                            <input type="text" placeholder="username" className="outline-none w-full" value={username} onChange={(e) => {setUsername(e.target.value)}}/>
+                            <input type="text" name="username" placeholder="username" className="outline-none w-full" value={username} onChange={(e) => handleChange(e)} />
                         </div>
+                        {username && username.length < 4 && <span className={`text-sm text-red-600`}>Please enter a username between 4 and 15 characters</span>}
+                        {username.length >= 4 && error && <span className={`text-sm text-red-600`}>{error}</span>}
                     </div>
 
                     <div className={`email-pass ${buttonClick === 1 ? "flex" : "hidden"} w-1/2 flex flex-col items-center justify-center px-20`}>
@@ -173,8 +199,8 @@ const Signup = () => {
                         </div>
 
                         <form className="flex flex-col items-center gap-4 w-full">
-                            <input type="email" placeholder="Email" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]"/>
-                            <input type="password" placeholder="Password" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]"/>
+                            <input type="email" placeholder="Email" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]" />
+                            <input type="password" placeholder="Password" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]" />
                         </form>
                     </div>
 
@@ -186,9 +212,9 @@ const Signup = () => {
                     <div className="flex items-center justify-between h-full">
                         <h5 className="text-gray-300 text-[14px]">By continuing, you agree to the <Link className="text-white underline hover:no-underline" href={"/terms"}>terms of service</Link> and <Link className="text-white underline hover:no-underline" href={"/policy"}>privacy policy</Link> .</h5>
 
-                        <button className={`cursor-pointer text-center bg-[#181921] hover:bg-[#0d0d12] px-12 py-4 rounded-full disabled:bg-[#181921] hover:cursor-not-allowed `} 
-                        disabled={!available} 
-                        onClick={() => handleSignup()}
+                        <button className={`cursor-pointer text-center bg-[#181921] hover:bg-[#0d0d12] px-12 py-4 rounded-full disabled:bg-[#181921] disabled:cursor-not-allowed `}
+                            disabled={!available}
+                            onClick={() => handleSignup()}
                         >Sign up</button>
                     </div>
 
