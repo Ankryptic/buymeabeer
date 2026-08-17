@@ -1,5 +1,8 @@
 import NextAuth from "next-auth"
+
 import GithubProvider from "next-auth/providers/github"
+import CredentialsProvider from "next-auth/providers/credentials";
+
 import ConnectDB from "@/app/db/ConnectDB"
 import User from "@/models/User"
 
@@ -13,7 +16,44 @@ export const Handler = NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
-    // ...add more providers here
+    CredentialsProvider({
+      name: "Credentials",
+
+      credentials: {
+        username: { label: "email", type: "eamil" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+
+        await ConnectDB();
+
+        const user = await User.findOne({ email: credentials.email.toLowerCase().trim()})
+
+        if(!user){
+          throw new Error("User not Found!")
+        }
+        if(!user.password){
+          throw new Error("Password not found. Continue with Gamil, GitHub....")
+        }
+        if(!user.emailVerified){
+          throw new Error("Plaese your Verify Email")
+        }
+
+        const valid = await bcrypt.compare(credentials.password, user.password)
+
+        if(!valid){
+          throw new Error("Invalid Email or Password")
+        }
+
+        return({
+          id: user._id,
+          username: user.username, 
+          email: user.email,
+          profileCompleted: user.profileCompleted
+        })
+        
+      }
+    }),
   ],
 
 
@@ -26,7 +66,7 @@ export const Handler = NextAuth({
       // check if user is Exist in the database
       const existingUser = await User.findOne({ email: user.email })
 
-      if(!existingUser){
+      if (!existingUser) {
 
         // this is used to send error query to the login page
         // return "/login?error=UserNotFound";
@@ -43,10 +83,10 @@ export const Handler = NextAuth({
       return true
     },
 
-    async jwt({token}) {
+    async jwt({ token, user }) {
       await ConnectDB()
 
-      if(token.email){
+      if (token.email) {
         const existingUser = await User.findOne({ email: token.email, });
 
         token.profileCompleted = existingUser?.profileCompleted ?? false;
@@ -55,17 +95,21 @@ export const Handler = NextAuth({
       return token;
     },
 
-    async session({ session, token }){
+    async session({ session, token }) {
       await ConnectDB()
 
-      const dbUser = await User.findOne({ email: session?.user.email})
+      const dbUser = await User.findOne({ email: session?.user.email })
 
       session.user.username = dbUser.username
       session.user.profileCompleted = token.profileCompleted
       return session;
     }
 
-  }
+  },
+
+  session: {
+    strategy: "jwt"
+  },
 
 })
 

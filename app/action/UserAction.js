@@ -136,3 +136,13 @@ export const chkUser = async(username) => {
         }
     }
 }
+
+// Verify Email address
+export const validateEmail = async() => {
+
+}
+
+// create new account and add to database
+// export const createNewAccount = async( username,  ) => {
+
+// }

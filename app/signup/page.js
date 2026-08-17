@@ -13,13 +13,14 @@ const Signup = () => {
     const router = useRouter();
     const [available, setAvailable] = useState(false)
     const [error, setError] = useState('')
+    const [otpSent, setOtpSent] = useState(true)
 
 
     const handleSignup = () => {
         buttonClick === 0 ? setButtonClick(1) : buttonClick === 1 ? router.push("/complete-your-page") : setButtonClick(0);
     }
 
-    const validateUser = async() => {
+    const validateUser = async () => {
         if (username.length > 3) {
             let chk = await chkUser(username)
 
@@ -27,7 +28,7 @@ const Signup = () => {
                 setError(chk?.error)
                 setAvailable(false)
             }
-            else if(chk?.success){
+            else if (chk?.success) {
                 setError('')
                 setAvailable(true)
             }
@@ -99,7 +100,7 @@ const Signup = () => {
                     <div className={`email-pass ${buttonClick === 1 ? "flex" : "hidden"} w-1/2 flex flex-col items-center justify-center px-20`}>
                         <div className="w-full text-3xl font-medium mb-5">Welcome, {username}</div>
 
-                        <div className="signIn-btns w-full flex flex-col gap-2">
+                        {!otpSent && <div className="signIn-btns w-full flex flex-col gap-2">
                             <button
                                 className="cursor-pointer flex items-center text-center bg-[#2f2d41] border border-[#0d0d12] rounded-lg shadow-md w-full px-6 pl-25 py-2 text-sm font-medium text-white hover:text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                 <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -191,18 +192,20 @@ const Signup = () => {
 
 
 
-                        </div>
+                        </div>}
 
-                        <div className='seprator flex items-center w-full m-8'>
+                        {!otpSent && <div className='seprator flex items-center w-full m-8'>
                             <span className='bg-[#0d0d12] w-full h-0.5'></span>
                             <span className='w-fit mx-4 text-center text-sm'>or</span>
                             <span className='bg-[#0d0d12] w-full h-0.5'></span>
-                        </div>
+                        </div>}
 
-                        <form className="flex flex-col items-center gap-4 w-full">
+                        {!otpSent && <form className="flex flex-col items-center gap-4 w-full">
                             <input type="email" placeholder="Email" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]" />
                             <input type="password" placeholder="Password" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]" />
-                        </form>
+                        </form>}
+                            {otpSent && <input type="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} />}
+
                     </div>
 
                 </div>
