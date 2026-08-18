@@ -151,7 +151,7 @@ export const validateEmail = async (email) => {
     if (!emailRegex.test(email)) {
         return {
             success: false,
-            message: "Invalid email format"
+            error: "Invalid email format"
         };
     }
 
@@ -167,7 +167,7 @@ export const validateEmail = async (email) => {
     else {
         return {
             success: false,
-            message: "Domain not Allowed",
+            error: "Domain not Allowed",
             allowedDomain
         }
     }

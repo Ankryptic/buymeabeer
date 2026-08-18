@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { chkUser } from "../action/UserAction";
-import { register } from "next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup";
+import { chkUser, validateEmail } from "../action/UserAction";
 
 const btnText = {
     0: "Next",
@@ -39,7 +38,7 @@ const Signup = () => {
         }));
     }
 
-    const handleClick = () => {
+    const handleClick = async () => {
 
         if(buttonClick === 0 && available){
             setButtonClick(1)
@@ -53,7 +52,20 @@ const Signup = () => {
             }
             setError({...error, email: "", password: ""})
 
+            if(credForm.email && credForm.password){
 
+                let isValid = await validateEmail(credForm.email)
+
+                if(isValid.success){
+                    setError({...error, email: ""})
+                    // register user using auth
+                    console.log(isValid.message)
+                }
+
+                if(isValid.error){
+                    setError({...error, email: isValid.error})
+                }
+            }
         }
     }
 
