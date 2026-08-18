@@ -5,6 +5,13 @@ import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { chkUser } from "../action/UserAction";
+import { register } from "next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup";
+
+const btnText = {
+    0: "Next",
+    1: "Next",
+    2: "Signup"
+}
 
 const Signup = () => {
     const { data: session } = useSession()
@@ -12,24 +19,57 @@ const Signup = () => {
     const [buttonClick, setButtonClick] = useState(0);
     const router = useRouter();
     const [available, setAvailable] = useState(false)
-    const [error, setError] = useState('')
-    const [otpSent, setOtpSent] = useState(true)
+    const [error, setError] = useState({
+        username: "",
+        email: "",
+        password: "",
+    })
+    const [otpSent, setOtpSent] = useState(false)
+    const [verificationCode, setVerificationCode] = useState("");
+    const [credForm, setCredForm] = useState({
+        email: "",
+        password: ""
+    })
+
+    const handleFormInput = (e) => {
+        const { value, name } = e.target;
+        setCredForm(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
+    const handleClick = () => {
+
+        if(buttonClick === 0 && available){
+            setButtonClick(1)
+        }
+        if(buttonClick === 1){
+            if(credForm.email === ""){
+                setError(prev => ({...prev, email: "Email is Required"}))
+            }
+            if(credForm.password === ""){
+                setError(prev => ({...prev, password: "Password is Required"}))
+            }
+            setError({...error, email: "", password: ""})
 
 
-    const handleSignup = () => {
-        buttonClick === 0 ? setButtonClick(1) : buttonClick === 1 ? router.push("/complete-your-page") : setButtonClick(0);
+        }
     }
 
     const validateUser = async () => {
+        if(username.length <= 3){
+            setAvailable(false)
+        }
         if (username.length > 3) {
             let chk = await chkUser(username)
 
             if (!chk?.success) {
-                setError(chk?.error)
+                setError({...error, username: chk?.error})
                 setAvailable(false)
             }
             else if (chk?.success) {
-                setError('')
+                setError({...error, username: ""})
                 setAvailable(true)
             }
         }
@@ -94,7 +134,7 @@ const Signup = () => {
                             <input type="text" name="username" placeholder="username" className="outline-none w-full" value={username} onChange={(e) => handleChange(e)} />
                         </div>
                         {username && username.length < 4 && <span className={`text-sm text-red-600`}>Please enter a username between 4 and 15 characters</span>}
-                        {username.length >= 4 && error && <span className={`text-sm text-red-600`}>{error}</span>}
+                        {username.length >= 4 && error.username && <span className={`text-sm text-red-600`}>{error.username}</span>}
                     </div>
 
                     <div className={`email-pass ${buttonClick === 1 ? "flex" : "hidden"} w-1/2 flex flex-col items-center justify-center px-20`}>
@@ -200,11 +240,17 @@ const Signup = () => {
                             <span className='bg-[#0d0d12] w-full h-0.5'></span>
                         </div>}
 
-                        {!otpSent && <form className="flex flex-col items-center gap-4 w-full">
-                            <input type="email" placeholder="Email" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]" />
-                            <input type="password" placeholder="Password" className="w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]" />
+                        {!otpSent && <form className="relative flex flex-col items-center w-full">
+
+                            <input type="email" name="email" placeholder="Email" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px] ${error.email ? "border border-red-500" : ""}`} value={credForm.email} onChange={handleFormInput}/>
+                            {error.email && <span className={`w-full text-sm text-red-600`}>{error.email}</span>}
+
+                            <input type="password" name="password" placeholder="Password" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 mt-4 rounded-2xl text-[16px] ${error.password ? "border border-red-500" : ""}`} value={credForm.password} onChange={handleFormInput}/>
+                            {error.password && <span className={`w-full text-sm text-red-600`}>{error.password}</span>}
+
                         </form>}
-                            {otpSent && <input type="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} />}
+
+                            {otpSent && <input type="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)}/>}
 
                     </div>
 
@@ -218,8 +264,8 @@ const Signup = () => {
 
                         <button className={`cursor-pointer text-center bg-[#181921] hover:bg-[#0d0d12] px-12 py-4 rounded-full disabled:bg-[#181921] disabled:cursor-not-allowed `}
                             disabled={!available}
-                            onClick={() => handleSignup()}
-                        >Sign up</button>
+                            onClick={() => handleClick()}
+                        >{btnText[buttonClick]}</button>
                     </div>
 
                 </div>
