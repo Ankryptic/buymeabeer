@@ -87,7 +87,7 @@ export const getUserData = async (username) => {
 }
 
 // Payment Method
-export const intitPayment = async (amount, to_username , paymentForm) => {
+export const intitPayment = async (amount, to_username, paymentForm) => {
     await ConnectDB();
 
     var instance = new Razorpay({ key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, key_secret: process.env.RAZORPAY_SECRET })
@@ -106,7 +106,7 @@ export const intitPayment = async (amount, to_username , paymentForm) => {
         to_username: to_username,
         Oid: order.id,
         message: paymentForm.message,
-        
+
     })
 
     return order;
@@ -114,35 +114,61 @@ export const intitPayment = async (amount, to_username , paymentForm) => {
 
 
 // Check for is Username valid or exist or not
-export const chkUser = async(username) => {
+export const chkUser = async (username) => {
     await ConnectDB()
 
     // Username validation
     const pattern = /^[a-zA-Z][a-zA-Z0-9_]{3,15}$/;
     let test = pattern.test(username);
 
-    if(!test){
-        return {success: false, error: "Username may only contain letters, numbers and '_' underscore" }
+    if (!test) {
+        return { success: false, error: "Username may only contain letters, numbers and '_' underscore" }
     }
-    else if(test){
+    else if (test) {
         // check for database availability
         let u = await User.findOne({ username: username })
 
-        if(!u){
-            return {success: true}
+        if (!u) {
+            return { success: true }
         }
-        else if(u){
-            return {success: false, error: "Username not available"}
+        else if (u) {
+            return { success: false, error: "Username not available" }
         }
     }
 }
 
 // Verify Email address
-export const validateEmail = async() => {
+export const validateEmail = async (email) => {
+    if (email === null) {
+        return {
+            success: false,
+            message: "Email is Required"
+        }
+    }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+        return {
+            success: false,
+            message: "Invalid email format"
+        };
+    }
+
+    let domain = email.split("@")[1].toLowerCase();
+    const allowedDomain = ["gmail.com", "rediffmail.com", "yahoomail.com"]
+
+    if (allowedDomain.includes(domain)) {
+        return {
+            success: true,
+            message: "Valid Domain"
+        }
+    }
+    else {
+        return {
+            success: false,
+            message: "Domain not Allowed",
+            allowedDomain
+        }
+    }
 }
-
-// create new account and add to database
-// export const createNewAccount = async( username,  ) => {
-
-// }
