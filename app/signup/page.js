@@ -30,6 +30,23 @@ const Signup = () => {
         password: ""
     })
 
+    // Register User and Send Verification Code
+    const GenerateOTP = async () => {
+        let res = await fetch(`/api/auth/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                email: credForm.email,
+                password: credForm.password
+            })
+        })
+
+        return res.json();
+    }
+
     const handleFormInput = (e) => {
         const { value, name } = e.target;
         setCredForm(prev => ({
@@ -40,48 +57,59 @@ const Signup = () => {
 
     const handleClick = async () => {
 
-        if(buttonClick === 0 && available){
+        if (buttonClick === 0 && available) {
             setButtonClick(1)
         }
-        if(buttonClick === 1){
-            if(credForm.email === ""){
-                setError(prev => ({...prev, email: "Email is Required"}))
+        if (buttonClick === 1) {
+            if (credForm.email === "") {
+                setError(prev => ({ ...prev, email: "Email is Required" }))
+                return;
             }
-            if(credForm.password === ""){
-                setError(prev => ({...prev, password: "Password is Required"}))
+            if (credForm.password === "") {
+                setError(prev => ({ ...prev, password: "Password is Required" }))
+                return;
             }
-            setError({...error, email: "", password: ""})
+            setError({ ...error, email: "", password: "" })
 
-            if(credForm.email && credForm.password){
+            if (credForm.email && credForm.password) {
 
                 let isValid = await validateEmail(credForm.email)
 
-                if(isValid.success){
-                    setError({...error, email: ""})
-                    // register user using auth
-                    console.log(isValid.message)
+                if (isValid.success) {
+                    setError({ ...error, email: "" })
+
+                    let reg = await GenerateOTP()
+
+                    if(!reg.success){
+                        console.log("failed to send otp")
+                        return
+                    }
+
+                    setOtpSent(true)
+                    setButtonClick(2)
                 }
 
-                if(isValid.error){
-                    setError({...error, email: isValid.error})
+                if (isValid.error) {
+                    setError({ ...error, email: isValid.error })
+                    return
                 }
             }
         }
     }
 
     const validateUser = async () => {
-        if(username.length <= 3){
+        if (username.length <= 3) {
             setAvailable(false)
         }
         if (username.length > 3) {
             let chk = await chkUser(username)
 
             if (!chk?.success) {
-                setError({...error, username: chk?.error})
+                setError({ ...error, username: chk?.error })
                 setAvailable(false)
             }
             else if (chk?.success) {
-                setError({...error, username: ""})
+                setError({ ...error, username: "" })
                 setAvailable(true)
             }
         }
@@ -94,6 +122,9 @@ const Signup = () => {
     useEffect(() => {
         validateUser()
     }, [username])
+
+    useEffect(() => {
+    }, [otpSent])
 
     return (
         <div className="w-full flex bg-[#2f2d41] text-white">
@@ -149,7 +180,7 @@ const Signup = () => {
                         {username.length >= 4 && error.username && <span className={`text-sm text-red-600`}>{error.username}</span>}
                     </div>
 
-                    <div className={`email-pass ${buttonClick === 1 ? "flex" : "hidden"} w-1/2 flex flex-col items-center justify-center px-20`}>
+                    <div className={`email-pass ${buttonClick >= 1 ? "flex" : "hidden"} w-1/2 flex flex-col items-center justify-center px-20`}>
                         <div className="w-full text-3xl font-medium mb-5">Welcome, {username}</div>
 
                         {!otpSent && <div className="signIn-btns w-full flex flex-col gap-2">
@@ -254,15 +285,17 @@ const Signup = () => {
 
                         {!otpSent && <form className="relative flex flex-col items-center w-full">
 
-                            <input type="email" name="email" placeholder="Email" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px] ${error.email ? "border border-red-500" : ""}`} value={credForm.email} onChange={handleFormInput}/>
+                            <input type="email" name="email" placeholder="Email" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px] ${error.email ? "border border-red-500" : ""}`} value={credForm.email} onChange={handleFormInput} />
                             {error.email && <span className={`w-full text-sm text-red-600`}>{error.email}</span>}
 
-                            <input type="password" name="password" placeholder="Password" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 mt-4 rounded-2xl text-[16px] ${error.password ? "border border-red-500" : ""}`} value={credForm.password} onChange={handleFormInput}/>
+                            <input type="password" name="password" placeholder="Password" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 mt-4 rounded-2xl text-[16px] ${error.password ? "border border-red-500" : ""}`} value={credForm.password} onChange={handleFormInput} />
                             {error.password && <span className={`w-full text-sm text-red-600`}>{error.password}</span>}
 
                         </form>}
 
-                            {otpSent && <input type="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)}/>}
+                        {otpSent && <div>
+                            <span className={`w-full text-sm text-red-600`}>OTP sent to your email {credForm.email}</span>
+                            <input type="text" id="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} /></div>}
 
                     </div>
 

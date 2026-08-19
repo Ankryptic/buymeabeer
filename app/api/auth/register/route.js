@@ -4,6 +4,7 @@ import crypto from "crypto";
 
 import User from "@/models/User";
 import ConnectDB from "@/app/db/ConnectDB";
+import { sendVerificationEmail } from "@/lib/sendVerificationEmail";
 
 export async function POST(req) {
     try {
