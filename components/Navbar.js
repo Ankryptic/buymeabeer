@@ -62,8 +62,8 @@ const Navbar = () => {
                     <span className="text-[15px]">Search creators</span>
                 </div>
                 <Link href={"/login"} className="hover:bg-[#3b354f] px-4 py-2 text-[15px] font-semibold flex items-center justify-center rounded-full transition-all duration-300"><span>Log in</span></Link>
-                <Link href={"/signup"}>
-                    <div className="relative group">
+                <Link href={"/signup"} className="z-3">
+                    <div className="relative group cursor-pointer">
                         <div
                             className="relative w-26 h-10 opacity-90 overflow-hidden rounded-xl bg-black z-10"
                         >
@@ -76,7 +76,7 @@ const Navbar = () => {
                             >
                                 <button
                                     name="text"
-                                    className="input font-semibold h-full opacity-90 w-full px-1 py-px text-[15px] rounded-xl bg-[#0d0d12]"
+                                    className="input font-semibold h-full opacity-90 w-full px-1 z-2 py-px text-[15px] rounded-xl bg-[#0d0d12] cursor-pointer"
                                 >
                                     Sign up
                                 </button>
