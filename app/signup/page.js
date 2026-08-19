@@ -176,8 +176,8 @@ const Signup = () => {
                             <span>buymeabeer.com/</span>
                             <input type="text" name="username" placeholder="username" className="outline-none w-full" value={username} onChange={(e) => handleChange(e)} />
                         </div>
-                        {username && username.length < 4 && <span className={`text-sm text-red-600`}>Please enter a username between 4 and 15 characters</span>}
-                        {username.length >= 4 && error.username && <span className={`text-sm text-red-600`}>{error.username}</span>}
+                        {username && username.length < 4 && <span className={`text-sm text-red-500 text-shadow-xs text-shadow-black `}>Please enter a username between 4 and 15 characters</span>}
+                        {username.length >= 4 && error.username && <span className={`text-sm text-red-500 text-shadow-xs text-shadow-black`}>{error.username}</span>}
                     </div>
 
                     <div className={`email-pass ${buttonClick >= 1 ? "flex" : "hidden"} w-1/2 flex flex-col items-center justify-center px-20`}>
@@ -286,16 +286,18 @@ const Signup = () => {
                         {!otpSent && <form className="relative flex flex-col items-center w-full">
 
                             <input type="email" name="email" placeholder="Email" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px] ${error.email ? "border border-red-500" : ""}`} value={credForm.email} onChange={handleFormInput} />
-                            {error.email && <span className={`w-full text-sm text-red-600`}>{error.email}</span>}
+                            {error.email && <span className={`w-full text-sm text-red-500 text-shadow-xs text-shadow-black`}>{error.email}</span>}
 
                             <input type="password" name="password" placeholder="Password" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 mt-4 rounded-2xl text-[16px] ${error.password ? "border border-red-500" : ""}`} value={credForm.password} onChange={handleFormInput} />
-                            {error.password && <span className={`w-full text-sm text-red-600`}>{error.password}</span>}
+                            {error.password && <span className={`w-full text-sm text-red-500 text-shadow-xs text-shadow-black`}>{error.password}</span>}
 
                         </form>}
 
-                        {otpSent && <div>
-                            <span className={`w-full text-sm text-red-600`}>OTP sent to your email {credForm.email}</span>
-                            <input type="text" id="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} /></div>}
+                        {otpSent && <div className="w-full">
+                            <div className={`w-full text-sm text-black font-bold text-shadow-xs text-shadow-black`}>OTP sent to your email
+                                <span className="w-full text-red-600">{credForm.email} Tight maal</span>
+                            </div>
+                            <input type="text" inputMode="numeric" maxLength={6} id="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} /></div>}
 
                     </div>
 
