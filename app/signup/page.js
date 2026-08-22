@@ -22,6 +22,7 @@ const Signup = () => {
         username: "",
         email: "",
         password: "",
+        otp: ""
     })
     const [otpSent, setOtpSent] = useState(false)
     const [verificationCode, setVerificationCode] = useState("");
@@ -47,6 +48,26 @@ const Signup = () => {
         return res.json();
     }
 
+    const verifyEmail = async() => {
+        try {
+            let res = await fetch("/api/auth/verify-email", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: credForm.email,
+                    otp: verificationCode
+                })
+            })
+
+            return res.json();
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const handleFormInput = (e) => {
         const { value, name } = e.target;
         setCredForm(prev => ({
@@ -56,6 +77,9 @@ const Signup = () => {
     }
 
     const handleClick = async () => {
+        console.log("Clicked")
+        // console.log(verificationCode.length)
+        // console.log(buttonClick)
 
         if (buttonClick === 0 && available) {
             setButtonClick(1)
@@ -94,6 +118,25 @@ const Signup = () => {
                     return
                 }
             }
+        }
+        if (buttonClick === 2) {
+            if(verificationCode.length < 6 || verificationCode === ""){
+                setError(prev => ({...prev, otp: "Atleast 6 Digits Required"}))
+                return;
+            }
+            
+            // Verify Email
+            const verify = await verifyEmail()
+            console.log(verify)
+
+            if(verify.error){
+                setError({ ...error, otp: verify.error })
+            }
+
+            if(verify.success){
+                console.log(verify.message)
+            }
+            setError({...error, otp: ""})
         }
     }
 
@@ -294,11 +337,11 @@ const Signup = () => {
                         </form>}
 
                         {otpSent && <div className="w-full">
-                            <div className={`w-full text-sm text-black font-bold text-shadow-xs text-shadow-black`}>OTP sent to your email
-                                <span className="w-full text-red-600">{credForm.email} Tight maal</span>
+                            <div className={`w-full text-sm text-black font-bold text-shadow-xs text-shadow-black mb-2`}>OTP sent to your email
+                                <span className="w-full text-red-600 ml-1">{credForm.email}</span>
                             </div>
                             <input type="text" inputMode="numeric" maxLength={6} id="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} /></div>}
-
+                            {error.otp && <span className={`w-full text-sm text-red-500 text-shadow-xs text-shadow-black`}>{error.otp}</span>}
                     </div>
 
                 </div>
