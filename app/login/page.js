@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/react'
@@ -9,9 +9,25 @@ const Login = () => {
     const { data: session, status } = useSession()
     const router = useRouter()
 
+    const [credential, setCredential] = useState({
+        email: "",
+        password: ""
+    })
+
     // this is used to get error for Oauth if user not found
     // const searchParams = useSearchParams();
     // const error = searchParams.get("error")
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        const result = await signIn("credentials", credential)
+    }
+
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+
+        setCredential(prev => ({ ...prev, [name]: value}))
+    }
 
     useEffect(() => {
         if (status === "authenticated") {
@@ -38,9 +54,10 @@ const Login = () => {
                 </nav>
                 <div className='w-[30%] px-10 m-auto text-white bg-red-700s container flex flex-col items-center'>
                     <h2 className='font-bold text-3xl mt-12'>Welcome back</h2>
-                    <form className='mt-10 w-full flex flex-col items-center gap-5'>
-                        <input type="email" placeholder='Email' className='bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-5 py-3' />
-                        <button className='w-full cursor-pointer text-center bg-[#181921] hover:bg-[#0d0d12] py-3 rounded-full'>Continue with email</button>
+                    <form onSubmit={handleSubmit} className='mt-10 w-full flex flex-col items-center gap-4'>
+                        <input type="email" placeholder='Email' name='email' className='bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-5 py-3' value={credential.email} onChange={handleInput}/>
+                        <input type="password" placeholder='Password' name='password' className='bg-[#2f2d41] focus:bg-[#3b354f] text-white w-full rounded-xl px-5 py-3' value={credential.password} onChange={handleInput}/>
+                        <button type='submit' className='w-full cursor-pointer text-center bg-[#181921] hover:bg-[#0d0d12] py-3 rounded-full'>Continue with email</button>
                     </form>
                     <div className='flex items-center w-full m-8'>
                         <span className='bg-[#0d0d12] w-full h-0.5'></span>
