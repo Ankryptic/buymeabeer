@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { chkUser, validateEmail } from "../action/UserAction";
 
 const btnText = {
@@ -48,7 +48,7 @@ const Signup = () => {
         return res.json();
     }
 
-    const verifyEmail = async() => {
+    const verifyEmail = async () => {
         try {
             let res = await fetch("/api/auth/verify-email", {
                 method: "POST",
@@ -68,6 +68,18 @@ const Signup = () => {
         }
     }
 
+    const signInUser = async() => {
+        const result = await signIn('credentials', {
+            email: credForm.email,
+            password: credForm.password,
+            redirect: false
+        })
+        
+        if(result.ok){
+            router.push("/complete-your-page")
+        }
+    }
+
     const handleFormInput = (e) => {
         const { value, name } = e.target;
         setCredForm(prev => ({
@@ -77,9 +89,6 @@ const Signup = () => {
     }
 
     const handleClick = async () => {
-        console.log("Clicked")
-        // console.log(verificationCode.length)
-        // console.log(buttonClick)
 
         if (buttonClick === 0 && available) {
             setButtonClick(1)
@@ -104,7 +113,7 @@ const Signup = () => {
 
                     let reg = await GenerateOTP()
 
-                    if(!reg.success){
+                    if (!reg.success) {
                         console.log("failed to send otp")
                         return
                     }
@@ -120,23 +129,24 @@ const Signup = () => {
             }
         }
         if (buttonClick === 2) {
-            if(verificationCode.length < 6 || verificationCode === ""){
-                setError(prev => ({...prev, otp: "Atleast 6 Digits Required"}))
+            if (verificationCode.length < 6 || verificationCode === "") {
+                setError(prev => ({ ...prev, otp: "Atleast 6 Digits Required" }))
                 return;
             }
-            
+
             // Verify Email
             const verify = await verifyEmail()
             console.log(verify)
 
-            if(verify.error){
+            if (verify.error) {
                 setError({ ...error, otp: verify.error })
             }
 
-            if(verify.success){
-                console.log(verify.message)
+            if (verify.success) {
+                // if email verified then sign in the user
+                signInUser()
             }
-            setError({...error, otp: ""})
+            setError({ ...error, otp: "" })
         }
     }
 
@@ -341,7 +351,7 @@ const Signup = () => {
                                 <span className="w-full text-red-600 ml-1">{credForm.email}</span>
                             </div>
                             <input type="text" inputMode="numeric" maxLength={6} id="verify-code" placeholder="Enter OTP" className={`w-full bg-[#2f2d41] hover:bg-[#3b354f] px-4 py-2.5 rounded-2xl text-[16px]`} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} /></div>}
-                            {error.otp && <span className={`w-full text-sm text-red-500 text-shadow-xs text-shadow-black`}>{error.otp}</span>}
+                        {error.otp && <span className={`w-full text-sm text-red-500 text-shadow-xs text-shadow-black`}>{error.otp}</span>}
                     </div>
 
                 </div>
