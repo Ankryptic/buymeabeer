@@ -9,14 +9,24 @@ const Navbar = () => {
     const [upArrow, setupArrow] = useState(false);
 
     useEffect(() => {
-        const upArrowSrc = "/upArrow.svg";
-        const downArrowSrc = "/downArrow.svg";
+        const handleMouseEvent = (e) => {
+            if(!e.target.closest(".res-data")){
+                setupArrow(false)
+                arrows.current.style = "transform: rotate(0deg)";
+            }
+        }
+        document.addEventListener("mousedown", handleMouseEvent)
 
-        const updateSrc = upArrow ? upArrowSrc : downArrowSrc;
-        arrows.current.src = updateSrc;
-    }, [upArrow])
+        return () => {
+            document.removeEventListener("mousedown", handleMouseEvent)
+        }
+
+    }, [])
 
     const handleRes = () => {
+        if (!upArrow) arrows.current.style = "transform: rotate(-180deg)";
+        else arrows.current.style = "transform: rotate(0dedg)";
+
         setupArrow(!upArrow);
     }
 
@@ -25,28 +35,39 @@ const Navbar = () => {
             <div className="flex items-center justify-center gap-3 select-none">
                 <Link href={"/faq"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full transition-all duration-300"><span>FAQ</span></Link>
                 <Link href={"/reviews"} className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 text-[15px] rounded-full transition-all duration-300" ><span>Wall of &hearts;</span></Link>
-                <div className="cursor-pointer hover:bg-[#3b354f] px-4 py-2 rounded-full flex items-center justify-center gap-x-1 transition-all duration-300" onClick={handleRes} >
+
+                <div className="res-data relative cursor-pointer hover:bg-[#3b354f] px-4 py-2 rounded-full flex items-center justify-center gap-x-1 transition-all duration-300" onClick={handleRes} >
                     <span className="text-[15px]">Resources</span>
                     <Image
+                        className="transition-all duration-200"
                         ref={arrows}
                         src="/downArrow.svg"
                         width={18}
                         height={18}
                         alt="Down Arrow"
                     />
+
+                    <div className={`absolute top-10 left-2 w-48 flex flex-col bg-[#2f2d41] shadow shadow-black rounded-xl overflow-hidden transition-all duration-300
+                    ${upArrow ? "max-h-40 opacity-100 py-3 px-4" :
+                            "max-h-0 opacity-0 p-0"
+                        }`}>
+                        <span className={`cursor-pointer hover:bg-[#3b354f] px-6 py-2 rounded-xl text-gray-300`}>Help Center</span>
+                        <span className={`cursor-pointer hover:bg-[#3b354f] px-6 py-2 rounded-xl text-gray-300`}>iOS</span>
+                        <span className={`cursor-pointer hover:bg-[#3b354f] px-6 py-2 rounded-xl text-gray-300`}>Android</span>
+                    </div>
                 </div>
             </div>
 
             <div className="logo  cursor-pointer">
-                <Link href= "/" className="flex items-center justify-center">
-                <Image
-                    src="/cheers_noBG.gif"
-                    width={60}
-                    height={60}
-                    alt="Picture of the beer"
-                />
-                <span className="font-playwrite text-lg font-bold">Buy me a beer</span>
-                
+                <Link href="/" className="flex items-center justify-center">
+                    <Image
+                        src="/cheers_noBG.gif"
+                        width={60}
+                        height={60}
+                        alt="Picture of the beer"
+                    />
+                    <span className="font-playwrite text-lg font-bold">Buy me a beer</span>
+
                 </Link>
             </div>
 
