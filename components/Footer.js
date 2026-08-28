@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const resLinks = [
@@ -22,6 +22,27 @@ const Footer = ({ color }) => {
 
     const [resDd, setResDd] = useState(false)
     const resImgRef = useRef(null)
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if(!e.target.closest(".app-dd")) {
+                setAppDd(false)
+                appImgRef.current.style = "transform: rotate(0)"
+            }
+
+            if(!e.target.closest(".res-dd")) {
+                setResDd(false)
+                resImgRef.current.style = "transform: rotate(0)"
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
+
 
     const handleAppDd = () => {
         if (!appDd) appImgRef.current.style = "transform: rotate(180deg)";
@@ -52,7 +73,7 @@ const Footer = ({ color }) => {
                         <span className={`cursor-pointer hover:bg-[#3b354f] px-6 py-2 rounded-xl`}>iOS</span>
                         <span className={`cursor-pointer hover:bg-[#3b354f] px-6 py-2 rounded-xl`}>Android</span>
                     </div>
-                    <div className="cursor-pointer flex items-center gap-1 hover:text-gray-300" onClick={handleAppDd} onBlur={() => setAppDd(false)}>
+                    <div className="cursor-pointer flex items-center gap-1 hover:text-gray-300" onClick={handleAppDd}>
                         <span>Apps</span>
                         <img
                             className="transition-all duration-200"
