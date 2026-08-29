@@ -193,7 +193,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
                         <div className="relative w-25 h-25 rounded-xl overflow-hidden border-2 border-gray-300">
                             <Image
                                 className="invert object-contain"
-                                src={"/profile.svg"}
+                                src={userData.profilePic || "/profile.svg"}
                                 fill
                                 alt="profile-photo"
                             />
@@ -207,7 +207,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
                     <hr />
 
                     <div className="mt-8">Full name</div>
-                    <input type="text" defaultValue={"Shreeraj"} className="w-full bg-[#222130] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
+                    <input type="text" defaultValue={userData.name} className="w-full bg-[#222130] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
 
                     <hr />
                     <div className="mt-8">What are you creating?</div>
@@ -215,7 +215,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
 
                     <hr />
                     <div className="mt-8">About me</div>
-                    <input type="text" defaultValue={"Ai Engineer h"} className="w-full bg-[#222130] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
+                    <input type="text" defaultValue={userData.about} className="w-full bg-[#222130] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
 
                     <hr />
                     <div className="mt-8">Featured video</div>
@@ -223,7 +223,7 @@ const UserProfile = ({ showEdit, setShowEdit, userData }) => {
 
                     <hr />
                     <div className="mt-8">Social links</div>
-                    <input type="text" defaultValue={"https://www.instagram.com/shreeraj__12/"} className="w-full bg-[#222130] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
+                    <input type="text" defaultValue={userData.socialLink} className="w-full bg-[#222130] focus:bg-[#5b5570] px-4 py-4 rounded-xl" />
 
                 </div>
 
